@@ -1,26 +1,25 @@
+import data from './Services'
 import './App.css'
+import { useEffect } from 'react'
 
 function App() {
+  useEffect(() => {
+    data.getUser()
+  })
+
   return (
-    <div className={'mainContainer'}>
-      <div className={'titleContainer'}>
-        <div>Login</div>
+    <>
+      <h1>Login</h1>
+      <div>
+        <input placeholder='Enter your TC here' />
       </div>
-      <br />
-      <div className={'inputContainer'}>
-        <input placeholder='Enter your email here' className={'inputBox'} />
-        <label className='errorLabel'></label>
+      <div>
+        <input placeholder='Enter your password here' />
       </div>
-      <br />
-      <div className={'inputContainer'}>
-        <input placeholder='Enter your password here' className={'inputBox'} />
-        <label className='errorLabel'></label>
+      <div>
+        <input type='button' value={'Log in'} />
       </div>
-      <br />
-      <div className={'inputContainer'}>
-        <input className={'inputButton'} type='button' value={'Log in'} />
-      </div>
-    </div>
+    </>
   )
 }
 
