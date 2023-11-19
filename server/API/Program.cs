@@ -8,6 +8,7 @@ using Core.Utilities.Security.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Core.Extensions;
+using Autofac.Core;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -48,6 +49,17 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).Conf
     builder.RegisterModule(new AutofacBusinessModule());
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReact", builder =>
+    {
+        builder.WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -57,10 +69,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("AllowReact");
 
 app.Run();
