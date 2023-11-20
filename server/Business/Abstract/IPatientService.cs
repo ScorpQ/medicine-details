@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IUserService
+    public interface IPatientService
     {
-        List<OperationClaim> GetClaims(User user);
-        void Add(User user);
-        User GetByTC(string TC);
+        List<OperationClaim> GetClaims(Patient patient);
+        void Add(Patient patient);
+        Patient GetByTC(string TC);
     }
 }

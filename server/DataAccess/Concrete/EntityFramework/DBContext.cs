@@ -18,7 +18,9 @@ namespace DataAccess.Concrete.EntityFramework
             configurationManager.AddJsonFile("appsettings.json");
             optionsBuilder.UseSqlServer(configurationManager.GetConnectionString("sqlConnection"));
         }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        
+        public DbSet<Doctor> Doctors { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
 

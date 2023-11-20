@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IUserControlService
+    public interface IControlService
     {
-        IDataResult<List<User>> GetAll();
+        IDataResult<List<Patient>> GetAllPatient();
+        IDataResult<List<Doctor>> GetAllDoctor();
     }
 }

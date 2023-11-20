@@ -2,12 +2,10 @@
 
 namespace Entities.DTOs
 {
-    public class UserForRegisterDto : IDto
+    public class DoctorForLoginDto : IDto
     {
-       
+
         public string TC { get; set; }
         public string Password { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
     }
 }

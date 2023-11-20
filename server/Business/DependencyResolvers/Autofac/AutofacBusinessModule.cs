@@ -23,11 +23,17 @@ namespace Business.DependencyResolvers.Autofac
         {
             
 
-            builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
-            builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
+            builder.RegisterType<PatientManager>().As<IPatientService>().SingleInstance();
+            builder.RegisterType<EfPatientDal>().As<IPatientDal>().SingleInstance();
 
-            builder.RegisterType<AuthManager>().As<IAuthService>();
+            builder.RegisterType<PatientAuthManager>().As<IPatientAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+
+            builder.RegisterType<DoctorAuthManager>().As<IDoctorAuthService>();
+            builder.RegisterType<EfDoctorDal>().As<IDoctorDal>().SingleInstance();
+            builder.RegisterType<DoctorManager>().As<IDoctorService>().SingleInstance();
+
+
 
             var assembly = Assembly.GetExecutingAssembly();
 

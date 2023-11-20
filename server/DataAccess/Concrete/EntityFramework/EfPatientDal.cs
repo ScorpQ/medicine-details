@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfUserDal : EfEntityRepositoryBase<User, DBContext>, IUserDal
+    public class EfPatientDal : EfEntityRepositoryBase<Patient, DBContext>, IPatientDal
     {
-        public List<OperationClaim> GetClaims(User user)
+        public List<OperationClaim> GetClaims(Patient user)
         {
             using (var context = new DBContext())
             {   //ilgili tablolara join atıyoruz

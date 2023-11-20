@@ -11,6 +11,6 @@ namespace Core.Utilities.Security.JWT
     {
         //kullanıcı bilgilerini girdikten sonra  eğer bilgileri doğruysa bu operasyon çalışacak ve bu kullanıcının claim lerini bulup
         //Json Web Token üretip vericek
-        AccessToken CreateToken(User user,List<OperationClaim> operationClaims);
+        AccessToken CreateToken(Patient user,List<OperationClaim> operationClaims);
     }
 }
