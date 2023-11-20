@@ -1,5 +1,6 @@
 ﻿using Core.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,10 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=medicine;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            ConfigurationManager configurationManager = new ConfigurationManager();
+            configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../API"));
+            configurationManager.AddJsonFile("appsettings.json");
+            optionsBuilder.UseSqlServer(configurationManager.GetConnectionString("sqlConnection"));
         }
         public DbSet<User> Users { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
