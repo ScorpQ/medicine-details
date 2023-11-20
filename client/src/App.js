@@ -1,24 +1,13 @@
-import data from './Services'
+import PhysicianLogin from './Component/PhysicianLogin'
+import PatientLogin from './Component/PatientLogin'
+
 import './App.css'
-import { useEffect } from 'react'
 
 function App() {
-  useEffect(() => {
-    data.getUser()
-  })
-
   return (
     <>
-      <h1>Login</h1>
-      <div>
-        <input placeholder='Enter your TC here' />
-      </div>
-      <div>
-        <input placeholder='Enter your password here' />
-      </div>
-      <div>
-        <input type='button' value={'Log in'} />
-      </div>
+      <PhysicianLogin />
+      <PatientLogin />
     </>
   )
 }
