@@ -12,8 +12,9 @@ const PatientLogin = () => {
     setPassword(target.value)
   }
 
-  const login = () => {
-    Medicine.login(id, password)
+  const login = async () => {
+    const result = await Medicine.Patientlogin(id, password)
+    return result ? console.log('yönlendir.') : console.log('hatalı')
   }
 
   return (
