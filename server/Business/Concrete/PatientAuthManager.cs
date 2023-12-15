@@ -52,7 +52,7 @@ namespace Business.Concrete
                 return new ErrorDataResult<Patient>(Messages.PasswordError);
             }
 
-            return new SuccessDataResult<Patient>(patientToCheck, Messages.SuccessfulLogin);
+            return new SuccessDataResult<Patient>(_patientService.GetByTC(patientForLoginDto.TC), Messages.SuccessfulLogin);
         }
 
         public IResult PatientExists(string TC)

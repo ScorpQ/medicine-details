@@ -27,7 +27,7 @@ namespace API.Controllers
 
             if (doctorToLogin.Success)
             {
-                return Ok(doctorToLogin.Data.Id);
+                return Ok(doctorToLogin.Data.TC);
             }
 
             return BadRequest(doctorToLogin.Message);

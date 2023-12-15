@@ -24,13 +24,13 @@ namespace WebAPI.Controllers
                 return BadRequest(patientToLogin.Message);
             }
 
-            var result = _patientAuthService.CreateAccessToken(patientToLogin.Data);
-            if (result.Success)
+            //var result = _patientAuthService.CreateAccessToken(patientToLogin.Data);
+            if (patientToLogin.Success)
             {
-                return Ok(result.Data);
+                return Ok(patientToLogin.Data.TC);
             }
 
-            return BadRequest(result.Message);
+            return BadRequest(patientToLogin.Message);
         }
 
         [HttpPost("Register")]
