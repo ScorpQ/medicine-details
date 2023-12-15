@@ -39,6 +39,13 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<MedicineManager>().As<IMedicineService>().SingleInstance();
             builder.RegisterType<EfMedicineDal>().As<IMedicineDal>().SingleInstance();
 
+            builder.RegisterType<DepartmentManager>().As<IDepartmentService>().SingleInstance();
+            builder.RegisterType<EfDepartmentDal>().As<IDepartmentDal>().SingleInstance();
+
+            builder.RegisterType<TimeOfUseManager>().As<ITimeOfUseService>().SingleInstance();
+            builder.RegisterType<EfTimeOfUseDal>().As<ITimeOfUseDal>().SingleInstance();
+
+
             var assembly = Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

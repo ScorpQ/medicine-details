@@ -31,5 +31,13 @@ namespace Business.Constants
         public static string PrescriptionListedByTC = "Reçeteler Listelendi";
         public static string PrescriptionDtoListed = "Reçete Listelendi";
         public static string PrescriptionUpdated = "Reçete Güncellendi";
+        public static string DepartmentAdded = "Departman Eklendi";
+        public static string DepartmentDelete = "Departman Silindi";
+        public static string DepartmentNotDelete = "Departman Silinemedi";
+        public static string DepartmentGetAll = "Departmanlar Listelendi";
+        public static string DepartmentListedById = "Departman Listelendi";
+        public static string DepartmentUpdated = "Departman Güncellendi";
+        public static string TimeOfUseAdded = "Kullanım Süresi Eklendi";
+        public static string TimeOfUseGetAll = "Kullanım Süresi Listelendi";
     }
 }

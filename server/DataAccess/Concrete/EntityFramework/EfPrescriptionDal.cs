@@ -19,7 +19,10 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from p in context.Prescriptions
                              join d in context.Doctors on p.DoctorTC equals d.TC
                              join patient in context.Patients on p.PatientTC equals patient.TC
-                             join m in context.Medicines on p.MedicineId equals m.Id where p.PatientTC==TC
+                             join m in context.Medicines on p.MedicineId equals m.Id
+                             join department in context.Departments on d.DepartmentId equals department.Id
+                             join t in context.TimeOfUses on p.TimeOfUse equals t.Id
+                             where p.PatientTC==TC
                              select new PrescriptionDto
                              {
                                  Id = p.Id,
@@ -35,7 +38,9 @@ namespace DataAccess.Concrete.EntityFramework
                                  Pieces=p.Pieces,
                                  Info=p.Info,
                                  DoctorTC=p.DoctorTC,
-                                 PatientTC=p.PatientTC
+                                 PatientTC=p.PatientTC,
+                                 DepartmentName=department.DepartmentName,
+                                 TimeOfUseName=t.TimeOfUseName
                              };
                 return result.ToList();
             }

@@ -15,7 +15,7 @@ namespace Entities.DTOs
         public int MedicineId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public char TimeOfUse { get; set; }
+        public int TimeOfUse { get; set; }
         public string Pieces { get; set; }
         public string Info { get; set; }
         public string DoctorName { get; set; }
@@ -23,6 +23,8 @@ namespace Entities.DTOs
         public string PatientName { get; set; }
         public string PatientLastname { get; set; }
         public string MedicineName { get; set; }
+        public string DepartmentName { get; set; }
+        public string TimeOfUseName { get; set; }   
 
     }
 }
