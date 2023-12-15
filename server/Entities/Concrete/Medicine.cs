@@ -11,6 +11,6 @@ namespace Entities.Concrete
     {
         public int Id { get; set; }
         public string MedicineName { get; set; }
-        public string DepertmentId { get; set; }
+        public int DepartmentId { get; set; }
     }
 }

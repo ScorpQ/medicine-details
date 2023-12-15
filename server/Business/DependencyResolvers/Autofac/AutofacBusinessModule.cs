@@ -33,7 +33,11 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfDoctorDal>().As<IDoctorDal>().SingleInstance();
             builder.RegisterType<DoctorManager>().As<IDoctorService>().SingleInstance();
 
+            builder.RegisterType<PrescriptionManager>().As<IPrescriptionService>().SingleInstance();
+            builder.RegisterType<EfPrescriptionDal>().As<IPrescriptionDal>().SingleInstance();
 
+            builder.RegisterType<MedicineManager>().As<IMedicineService>().SingleInstance();
+            builder.RegisterType<EfMedicineDal>().As<IMedicineDal>().SingleInstance();
 
             var assembly = Assembly.GetExecutingAssembly();
 

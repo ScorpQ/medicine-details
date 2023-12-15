@@ -20,7 +20,6 @@ namespace DataAccess.Concrete.EntityFramework
             optionsBuilder.UseSqlServer(configurationManager.GetConnectionString("sqlConnection"));
         }
         public DbSet<Patient> Patients { get; set; }
-        
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }

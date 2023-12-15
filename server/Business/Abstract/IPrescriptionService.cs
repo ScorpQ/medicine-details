@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,10 @@ namespace Business.Abstract
     public interface IPrescriptionService
     {
         IDataResult<List<Prescription>> GetAll();
-        IDataResult<Prescription> GetById(int id);
+        IDataResult<List<Prescription>> GetByTC(string TC);
         IResult Add(Prescription prescription);
         IResult Update(Prescription prescription);
         IResult Delete(int id);
-        IDataResult<List<Prescription>> GetDto();
+        IDataResult<List<PrescriptionDto>> GetDtoDetails(string TC);
     }
 }

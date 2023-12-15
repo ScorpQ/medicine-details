@@ -10,8 +10,8 @@ namespace Entities.Concrete
     public class Prescription : IEntity
     {
         public int Id { get; set; }
-        public int DoctorId {  get; set; }
-        public int PatientId { get; set; }
+        public string DoctorTC {  get; set; }
+        public string PatientTC { get; set; }
         public int MedicineId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

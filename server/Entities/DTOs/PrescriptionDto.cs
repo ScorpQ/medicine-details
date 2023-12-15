@@ -9,5 +9,20 @@ namespace Entities.DTOs
 {
     public class PrescriptionDto : IDto
     {
+        public int Id { get; set; }
+        public string DoctorTC { get; set; }
+        public string PatientTC { get; set; }
+        public int MedicineId { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public char TimeOfUse { get; set; }
+        public string Pieces { get; set; }
+        public string Info { get; set; }
+        public string DoctorName { get; set; }
+        public string DoctorLastname { get; set; }
+        public string PatientName { get; set; }
+        public string PatientLastname { get; set; }
+        public string MedicineName { get; set; }
+
     }
 }

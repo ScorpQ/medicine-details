@@ -18,5 +18,18 @@ namespace Business.Constants
         public static string AccessTokenCreated = "Token oluşturuldu";
         public static string UserAdded = "Kullanıcı Eklendi";
         public static string UserGetAll = "Kullanıcılar Getirildi";
+        public static string MedicineAdded = "İlaç Eklendi";
+        public static string MedicineDelete = "İlaç Silindi";
+        public static string MedicineNotDelete = "İlaç Silinemedi";
+        public static string MedicineListed = "İlaçlar Listelendi";
+        public static string MedicineListedById = "İlaç Listelendi";
+        public static string MedicineUpdated = "İlaç Güncellendi";
+        public static string PrescriptionAdded = "Reçete Eklendi";
+        public static string PrescriptionDelete = "Reçete Silindi";
+        public static string PrescriptionNotDelete = "Reçete Silinemedi";
+        public static string PrescriptionListed = "Reçeteler Listelendi";
+        public static string PrescriptionListedByTC = "Reçeteler Listelendi";
+        public static string PrescriptionDtoListed = "Reçete Listelendi";
+        public static string PrescriptionUpdated = "Reçete Güncellendi";
     }
 }
