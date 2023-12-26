@@ -16,6 +16,8 @@ const Medicine = {
         tc: name,
         password: password,
       })
+      // response.status
+      console.log(response)
       return response
     } catch (error) {
       alert('API SOURCE HATALI')
@@ -31,6 +33,16 @@ const Medicine = {
       return response
     } catch (error) {
       alert('API SOURCE HATALI')
+    }
+  },
+
+  getMedicineData: async (id) => {
+    try {
+      const response = await axios.get(`https://localhost:7239/api/Prescriptions/GetDto?TC=${id}`)
+      console.log(response)
+      return response
+    } catch (error) {
+      alert(error)
     }
   },
 }

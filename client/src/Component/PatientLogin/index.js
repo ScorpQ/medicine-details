@@ -1,9 +1,16 @@
 import Medicine from '../../Services'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+// mantine imports
+import { useDisclosure } from '@mantine/hooks'
+import { Drawer, Button } from '@mantine/core'
 
 const PatientLogin = () => {
   const [id, setId] = useState()
   const [password, setPassword] = useState()
+  const [opened, { open, close }] = useDisclosure(false)
+  const navigate = useNavigate()
 
   const handleChangeID = ({ target }) => {
     setId(target.value)
@@ -14,15 +21,17 @@ const PatientLogin = () => {
 
   const login = async () => {
     const result = await Medicine.Patientlogin(id, password)
-    return result ? console.log('yönlendir.') : console.log('hatalı')
+    result ? navigate(`/patient/${result.data}`) : console.log('bilgi hata')
   }
 
   return (
     <>
-      <h1>Patient</h1>
-      <input placeholder='Enter your TC here' onChange={handleChangeID} />
-      <input placeholder='Enter your password here' onChange={handleChangePassword} />
-      <input type='button' value={'Log In'} onClick={login} />
+      <Drawer opened={opened} onClose={close} title='Patient'>
+        <input placeholder='Enter your TC here' onChange={handleChangeID} />
+        <input placeholder='Enter your password here' onChange={handleChangePassword} />
+        <input type='button' value={'Log In'} onClick={login} />
+      </Drawer>
+      <Button onClick={open}>Patient</Button>
     </>
   )
 }
