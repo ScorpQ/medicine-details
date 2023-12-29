@@ -1,17 +1,17 @@
 // client imports
 import PhysicianLogin from '../Component/PhysicianLogin'
 import PatientLogin from '../Component/PatientLogin'
+
+// Mantine Imports
 import '@mantine/core/styles.css'
-import { Flex, Container } from '@mantine/core'
+import { Flex } from '@mantine/core'
 
 const Login = () => {
   return (
-    <Container size='xs' h={1000}>
-      <Flex direction='column' gap={{ base: 'sm', sm: 'lg' }} size={200} justify={'center'}>
-        <PhysicianLogin />
-        <PatientLogin />
-      </Flex>
-    </Container>
+    <Flex direction='row' gap={100} justify={'center'} align={'center'} wrap='wrap' h={'90vh'}>
+      <PhysicianLogin />
+      <PatientLogin />
+    </Flex>
   )
 }
 

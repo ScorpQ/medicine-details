@@ -45,6 +45,16 @@ const Medicine = {
       alert(error)
     }
   },
+
+  getPhysicianReports: async (id) => {
+    try {
+      const response = await axios.get(`https://localhost:7239/api/Prescriptions/GetDoctorDto?TC=${id}`)
+      console.log(response)
+      return response
+    } catch (error) {
+      alert(error)
+    }
+  },
 }
 
 export default Medicine
