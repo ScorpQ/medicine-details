@@ -2,7 +2,9 @@
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +52,11 @@ namespace Business.Concrete
         public IDataResult<Medicine> GetById(int id)
         {
             return new DataResult<Medicine>(_medicineDal.Get(m => m.Id == id), true, Messages.MedicineListedById);
+        }
+
+        public IDataResult<List<MedicineDto>> GetByTC(string TC)
+        {
+            return new DataResult<List<MedicineDto>>(_medicineDal.GetDto(TC), true, Messages.MedicineListed);
         }
 
         public IResult Update(Medicine medicine)

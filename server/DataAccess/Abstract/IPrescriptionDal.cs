@@ -12,5 +12,7 @@ namespace DataAccess.Abstract
     public interface IPrescriptionDal : IEntityRepository<Prescription>
     {
         List<PrescriptionDto> GetDto(string TC);
+
+        List<PrescriptionDto> GetDoctorDto(string TC);
     }
 }

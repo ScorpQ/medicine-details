@@ -70,5 +70,13 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet("GetDto")]
+        public IActionResult GetDto(string TC)
+        {
+
+            return Ok(_medicineService.GetByTC(TC));
+
+        }
+
     }
 }

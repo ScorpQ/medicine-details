@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace Business.Abstract
     {
         IDataResult<List<Medicine>> GetAll();
         IDataResult<Medicine> GetById(int id);
+        IDataResult<List<MedicineDto>> GetByTC(string TC);
         IResult Add(Medicine medicine);
         IResult Update(Medicine medicine);
         IResult Delete(int id);

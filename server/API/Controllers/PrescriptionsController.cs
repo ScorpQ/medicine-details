@@ -77,5 +77,14 @@ namespace API.Controllers
             return Ok(_prescriptionService.GetDtoDetails(TC));
 
         }
+
+
+        [HttpGet("GetDoctorDto")]
+        public IActionResult GetDoctorDto(string TC)
+        {
+
+            return Ok(_prescriptionService.GetDtoDoctorDetails(TC));
+
+        }
     }
 }

@@ -55,6 +55,11 @@ namespace Business.Concrete
             return new  DataResult<List<PrescriptionDto>>(_prescriptionDal.GetDto(TC),true ,Messages.PrescriptionDtoListed);
         }
 
+        public IDataResult<List<PrescriptionDto>> GetDtoDoctorDetails(string TC)
+        {
+            return new DataResult<List<PrescriptionDto>>(_prescriptionDal.GetDoctorDto(TC), true, Messages.PrescriptionDtoListed);
+        }
+
         public IResult Update(Prescription prescription)
         {
             _prescriptionDal.Update(prescription);
