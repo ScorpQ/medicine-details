@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Entities.DTOs
 {
-    public class MedicineDetailsDto :IDto
+    public class DoctorImageDto : IDto
     {
         public int Id { get; set; }
-        public int MedicineId { get; set; }
-        public string MedicineName { get; set; }
-        public string Info { get; set; }
-        public string WebSite { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int ImageId { get; set; }
         public string ImagePath { get; set; }
+        
     }
 }

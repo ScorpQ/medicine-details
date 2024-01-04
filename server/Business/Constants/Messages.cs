@@ -48,5 +48,20 @@ namespace Business.Constants
         public static string PatientNotDelete = "Hasta Silinemedi";
         public static string DoctorDelete = "Doktor Silindi";
         public static string DoctorNotDelete = "Doktor Silinemedi";
+        public static string MedicineImageDelete = "Resim Silindi";
+        public static string MedicineImageNotDelete = "Resim Silinemedi";
+        public static string MedicineImageAllListed = "Resimler Listelendi";
+        public static string ImageNotFound = "Resim Bulunamadı";
+        public static string MedicineImageAdded = "Resim Eklendi";
+        public static string DoctorImageListed = "Resim Listelendi";
+        public static string DoctorImageAllListed = "Resimler Listelendi";
+        public static string DoctorImageAdded = "Resim Eklendi";
+        public static string DoctorImageDelete = "Resim Silindi";
+        public static string DoctorImageNotDelete = "Resim Silinemedi";
+        public static string MedicineImageListed = "Resim Listelendi";
+        public static string MedicineImageNotUpdate = "Resim Güncelenemedi";
+        public static string MedicineImageUpdate = "Resim Güncellendi";
+        public static string DoctorImageUpdate = "Resim Güncellendi";
+        public static string DoctorImageNotUpdate = "Resim Güncellenemedi";
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Core.Entities.Concrete;
 using Core.Utilities.Results;
+using Entities.DTOs;
 
 namespace Business.Abstract
 {
@@ -10,5 +11,6 @@ namespace Business.Abstract
         IResult Update(string TC, string oldPassword, string newPassword);
         IResult Delete(int id);
         IDataResult<List<Doctor>> GetAll();
+        IDataResult<List<DoctorImageDto>> GetDoctorImage(string TC);
     }
 }

@@ -49,5 +49,13 @@ namespace API.Controllers
                 return BadRequest(result.Message);
             }
         }
+
+        [HttpGet("GetDoctorImage")]
+        public IActionResult GetDoctorImage(string TC)
+        {
+
+            return Ok(_doctorService.GetDoctorImage(TC));
+
+        }
     }
 }

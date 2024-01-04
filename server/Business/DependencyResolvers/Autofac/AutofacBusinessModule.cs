@@ -2,6 +2,7 @@
 using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
+using Core.Utilities.Helpers.FileHelper;
 using Core.Utilities.Interceptors;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
@@ -47,6 +48,12 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<MedicineDetailManager>().As<IMedicineDetailService>().SingleInstance();
             builder.RegisterType<EfMedicineDetailDal>().As<IMedicineDetailDal>().SingleInstance();
+
+            builder.RegisterType<DoctorImageManager>().As<IDoctorImageService>().SingleInstance();
+            builder.RegisterType<EfDoctorImageDal>().As<IDoctorImageDal>().SingleInstance();
+            builder.RegisterType<MedicineImageManager>().As<IMedicineImageService>().SingleInstance();
+            builder.RegisterType<EfMedicineImageDal>().As<IMedicineImageDal>().SingleInstance();
+            builder.RegisterType<FileHelperManager>().As<IFileHelper>().SingleInstance();
 
             var assembly = Assembly.GetExecutingAssembly();
 

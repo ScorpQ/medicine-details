@@ -7,6 +7,7 @@ using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,11 @@ namespace Business.Concrete
         public Doctor GetByTC(string TC)
         {
             return _doctorDal.Get(d => d.TC == TC);
+        }
+
+        public IDataResult<List<DoctorImageDto>> GetDoctorImage(string TC)
+        {
+            return new DataResult<List<DoctorImageDto>>(_doctorDal.GetDoctorImageDto(TC), true, Messages.UserGetAll);
         }
 
         public IResult Update(string TC, string oldPassword, string newPassword)
