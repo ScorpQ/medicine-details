@@ -45,6 +45,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<TimeOfUseManager>().As<ITimeOfUseService>().SingleInstance();
             builder.RegisterType<EfTimeOfUseDal>().As<ITimeOfUseDal>().SingleInstance();
 
+            builder.RegisterType<MedicineDetailManager>().As<IMedicineDetailService>().SingleInstance();
+            builder.RegisterType<EfMedicineDetailDal>().As<IMedicineDetailDal>().SingleInstance();
 
             var assembly = Assembly.GetExecutingAssembly();
 

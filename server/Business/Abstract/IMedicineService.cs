@@ -18,6 +18,5 @@ namespace Business.Abstract
         IResult Add(Medicine medicine);
         IResult Update(Medicine medicine);
         IResult Delete(int id);
-       
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Core.Entities.Concrete;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -24,6 +25,7 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<MedicineDetail> MedicineDetails { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<TimeOfUse> TimeOfUses { get; set; }

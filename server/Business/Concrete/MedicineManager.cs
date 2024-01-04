@@ -40,13 +40,13 @@ namespace Business.Concrete
             }
             else
             {
-                return new ErrorResult(Messages.MedicineNotDelete);
+                return new ErrorResult(Messages.PatientNotDelete);
             }
         }
 
         public IDataResult<List<Medicine>> GetAll()
         {
-            return new DataResult<List<Medicine>>(_medicineDal.GetAll(), true, Messages.MedicineListed);
+            return new DataResult<List<Medicine>>(_medicineDal.GetAll(), true, Messages.MedicineDetailListed);
         }
 
         public IDataResult<Medicine> GetById(int id)
@@ -56,13 +56,13 @@ namespace Business.Concrete
 
         public IDataResult<List<MedicineDto>> GetByTC(string TC)
         {
-            return new DataResult<List<MedicineDto>>(_medicineDal.GetDto(TC), true, Messages.MedicineListed);
+            return new DataResult<List<MedicineDto>>(_medicineDal.GetDto(TC), true, Messages.MedicineDetailListed);
         }
 
         public IResult Update(Medicine medicine)
         {
             _medicineDal.Update(medicine);
-            return new SuccessResult(Messages.MedicineUpdated);
+            return new SuccessResult(Messages.PasswordUpdated);
         }
     }
 }

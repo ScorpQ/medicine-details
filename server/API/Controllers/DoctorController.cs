@@ -1,27 +1,24 @@
 ﻿using Business.Abstract;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TestController : ControllerBase
+    public class DoctorController : ControllerBase
     {
-        private readonly IControlService _controlService;
-
-        public TestController(IControlService controlService)
+        private readonly IDoctorService _doctorService;
+        public DoctorController(IDoctorService doctorService)
         {
-            _controlService = controlService;
+            _doctorService = doctorService;
         }
 
 
-        [HttpGet("GetAllPatient")]
+        [HttpGet("GetAll")]
         public IActionResult GetAllPatient()
         {
-            var result = _controlService.GetAllPatient();
+            var result = _doctorService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -33,10 +30,16 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet("GetAllDoctor")]
-        public IActionResult GetAllDoctor()
+        [HttpDelete("Delete")]
+        public IActionResult Delete(int id)
         {
-            var result = _controlService.GetAllDoctor();
+            return Ok(_doctorService.Delete(id));
+        }
+
+        [HttpPut("Update")]
+        public IActionResult Update(string TC, string oldPassword, string newPassword)
+        {
+            var result = _doctorService.Update(TC, oldPassword, newPassword);
             if (result.Success)
             {
                 return Ok(result);
@@ -44,9 +47,7 @@ namespace API.Controllers
             else
             {
                 return BadRequest(result.Message);
-
             }
         }
-
     }
 }

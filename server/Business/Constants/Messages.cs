@@ -21,7 +21,7 @@ namespace Business.Constants
         public static string MedicineAdded = "İlaç Eklendi";
         public static string MedicineDelete = "İlaç Silindi";
         public static string MedicineNotDelete = "İlaç Silinemedi";
-        public static string MedicineListed = "İlaçlar Listelendi";
+        public static string MedicineDetailListed = "İlaçlar Listelendi";
         public static string MedicineListedById = "İlaç Listelendi";
         public static string MedicineUpdated = "İlaç Güncellendi";
         public static string PrescriptionAdded = "Reçete Eklendi";
@@ -39,5 +39,14 @@ namespace Business.Constants
         public static string DepartmentUpdated = "Departman Güncellendi";
         public static string TimeOfUseAdded = "Kullanım Süresi Eklendi";
         public static string TimeOfUseGetAll = "Kullanım Süresi Listelendi";
+        public static string MedicineDetailAdded = "İlaç Detay Eklendi";
+        public static string MedicineDetailUpdated = "İlaç Detay Güncellendi";
+        public static string MedicineDetailDelete = "İlaç Detay Silindi";
+        public static string MedicineDetailNotDelete = "İlaç Detay Silinemedi";
+        public static string PatientDelete = "Hasta Silindi";
+        public static string PasswordUpdated = "Şifre Güncellendi";
+        public static string PatientNotDelete = "Hasta Silinemedi";
+        public static string DoctorDelete = "Doktor Silindi";
+        public static string DoctorNotDelete = "Doktor Silinemedi";
     }
 }

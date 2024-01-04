@@ -13,5 +13,8 @@ namespace Business.Abstract
         List<OperationClaim> GetClaims(Patient patient);
         void Add(Patient patient);
         Patient GetByTC(string TC);
+        IResult Update(string TC,string oldPassword,string newPassword);
+        IResult Delete(int id);
+        IDataResult<List<Patient>> GetAll();
     }
 }
