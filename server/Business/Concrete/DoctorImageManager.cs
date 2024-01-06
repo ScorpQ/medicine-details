@@ -30,7 +30,7 @@ namespace Business.Concrete
         public IResult Add(IFormFile file, int id)
         {
             DoctorImage doctorImage = new DoctorImage();
-            doctorImage.ImagePath = _fileHelper.Upload(file, PathConstants.ImagesDoctorPath);
+            doctorImage.ImagePath = _fileHelper.Upload(file, PathConstants.ImagesDoctorAddPath);
             doctorImage.Id = id;
             _doctorImageDal.Add(doctorImage);
             return new SuccessResult(Messages.DoctorImageAdded);
@@ -41,7 +41,7 @@ namespace Business.Concrete
             var result = _doctorImageDal.Get(d => d.Id == id);
             if (result != null)
             {
-                _fileHelper.Delete(PathConstants.ImagesDoctorPath + result.ImagePath);
+                _fileHelper.Delete(PathConstants.ImagesDoctorAddPath + result.ImagePath);
                 _doctorImageDal.Delete(result);
                 return new SuccessResult(Messages.DoctorImageDelete);
             }
@@ -78,10 +78,10 @@ namespace Business.Concrete
             images.ForEach(image =>
             {
                 string baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
-                image.ImagePath = $"{baseUrl}/{PathConstants.ImagesMedicinePath}{image.ImagePath}";
+                image.ImagePath = $"{baseUrl}/{PathConstants.ImagesDoctorPath}{image.ImagePath}";
             });
 
-            return new DataResult<List<DoctorImage>>(images, true, Messages.MedicineImageListed);
+            return new DataResult<List<DoctorImage>>(images, true, Messages.DoctorImageListed);
         }
 
         public IResult Update(IFormFile file, int id)
@@ -89,7 +89,7 @@ namespace Business.Concrete
             var result = _doctorImageDal.Get(d => d.Id == id);
             if (result != null)
             {
-                result.ImagePath = _fileHelper.Update(file, PathConstants.ImagesDoctorPath + result.ImagePath, PathConstants.ImagesDoctorPath);
+                result.ImagePath = _fileHelper.Update(file, PathConstants.ImagesDoctorAddPath + result.ImagePath, PathConstants.ImagesDoctorAddPath);
                 _doctorImageDal.Update(result);
                 return new SuccessResult(Messages.DoctorImageUpdate);
             }
