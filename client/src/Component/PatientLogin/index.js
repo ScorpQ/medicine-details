@@ -4,7 +4,19 @@ import { useNavigate } from 'react-router-dom'
 
 // mantine imports
 import { useDisclosure } from '@mantine/hooks'
-import { Card, Avatar, Text, Group, Drawer, Button, Space } from '@mantine/core'
+import {
+  Card,
+  Avatar,
+  Text,
+  TextInput,
+  Drawer,
+  Button,
+  Fieldset,
+  Space,
+  Group,
+  Anchor,
+  PasswordInput,
+} from '@mantine/core'
 import classes from '../PhysicianLogin/doctor.css'
 
 const PatientLogin = () => {
@@ -12,6 +24,11 @@ const PatientLogin = () => {
   const [password, setPassword] = useState()
   const [opened, { open, close }] = useDisclosure(false)
   const navigate = useNavigate()
+
+  // Mantine Hooks
+  const [focused, setFocused] = useState(false)
+  const [value, setValue] = useState('')
+  const floating = value.trim().length !== 0 || focused || undefined
 
   const handleChangeID = ({ target }) => {
     setId(target.value)
@@ -41,25 +58,55 @@ const PatientLogin = () => {
       <Card withBorder padding='xl' radius='md' className={classes.card} w={400}>
         <Card.Section h={200} style={imageStyle} />
         <Avatar
-          src='https://media.istockphoto.com/id/1097493802/vector/patient-icon-customer-icon-with-add-additional-sign-patient-icon-and-new-plus-positive.jpg?s=612x612&w=0&k=20&c=IrugHP6i-oobykGTLg7kCHP-SPENaDFxhQKAIdM9XuI='
+          src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwjl_0ttoVTkLx-8yOgl4U3MJ9ByjsqsQhzZ3tXq4Ca5Hd2Gsx0zcaIfnLpSV5UAFI_8E&usqp=CAU'
           size={80}
-          radius={80}
-          style={icon}
+          radius={90}
           mx='auto'
           mt={-30}
           className={classes.avatar}
         />
         <Text ta='center' h={60} fz='xl' fw={700} mt='sm' mb='sm'>
-          Patient Login
+          Hasta Giriş Paneli
         </Text>
+        <Drawer opened={opened} onClose={close} title='Doktor Paneli'>
+          <Space h='xl' />
+          <Fieldset legend='Kişisel Bilgiler'>
+            <TextInput
+              label='Türkiye Cumhuriyet Kimlik Numarası'
+              placeholder='XXXXXXXXXXX'
+              classNames={classes}
+              value={id}
+              onChange={(event) => setId(event.currentTarget.value)}
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
+              mt='md'
+              autoComplete='nope'
+              data-floating={floating}
+              labelProps={{ 'data-floating': floating }}
+            />
+            <Space h='sm' />
+            <Group justify='space-between' mb={5}>
+              <Text component='label' htmlFor='your-password' size='sm' fw={500}>
+                Şifre
+              </Text>
 
-        <Drawer opened={opened} onClose={close} title='Patient'>
-          <input placeholder='Enter your TC here' onChange={handleChangeID} />
-          <input placeholder='Enter your password here' onChange={handleChangePassword} />
-          <input type='button' value={'Log In'} onClick={login} />
+              <Anchor href='#' onClick={(event) => event.preventDefault()} pt={2} fw={500} fz='xs'>
+                Şifreni mi unuttun?
+              </Anchor>
+            </Group>
+            <PasswordInput
+              placeholder='Your password'
+              id='your-password'
+              value={password}
+              onChange={(event) => setPassword(event.currentTarget.value)}
+            />
+            <Space h='xl' />
+            <input type='button' value={'Log In'} onClick={login} />
+          </Fieldset>
         </Drawer>
-        <Button size='lg' onClick={open} variant='gradient' gradient={{ to: 'teal', from: 'blue', deg: 121 }}>
-          Patient
+
+        <Button size='lg' onClick={open} variant='gradient' gradient={{ from: 'teal', to: 'blue', deg: 121 }}>
+          Physician
         </Button>
       </Card>
     </>
