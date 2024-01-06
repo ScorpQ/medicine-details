@@ -62,6 +62,7 @@ namespace DataAccess.Concrete.EntityFramework
                              join department in context.Departments on d.DepartmentId equals department.Id
                              join t in context.TimeOfUses on p.TimeOfUse equals t.Id
                              join img in context.MedicineImages on m.Id equals img.MedicineId
+                             join mt in context.MedicineTypes on m.MedicineType equals mt.Id
                              where p.PatientTC==TC
                              select new PrescriptionDto
                              {
@@ -81,7 +82,9 @@ namespace DataAccess.Concrete.EntityFramework
                                  PatientTC=p.PatientTC,
                                  DepartmentName=department.DepartmentName,
                                  TimeOfUseName=t.TimeOfUseName,
-                                 ImagePath = img.ImagePath
+                                 ImagePath = img.ImagePath,
+                                 MedicineTypeId = mt.Id,
+                                 MedicineTypeName = mt.MedicineTypeName
                              };
                 return result.ToList();
             }
