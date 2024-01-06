@@ -32,7 +32,7 @@ namespace Business.Concrete
         {
 
             MedicineImage medicineImage = new MedicineImage();
-            medicineImage.ImagePath = _fileHelper.Upload(file, PathConstants.ImagesMedicinePath);
+            medicineImage.ImagePath = _fileHelper.Upload(file, PathConstants.ImagesMedicineAddPath);
             medicineImage.MedicineId = id;
             _medicineImageDal.Add(medicineImage);
             return new SuccessResult(Messages.MedicineImageAdded);
@@ -43,7 +43,7 @@ namespace Business.Concrete
             var result = _medicineImageDal.Get(m => m.Id == id);
             if (result != null)
             {
-                _fileHelper.Delete(PathConstants.ImagesMedicinePath + result.ImagePath);
+                _fileHelper.Delete(PathConstants.ImagesMedicineAddPath + result.ImagePath);
                 _medicineImageDal.Delete(result);
                 return new SuccessResult(Messages.MedicineImageDelete);
             }
@@ -101,7 +101,7 @@ namespace Business.Concrete
             var result = _medicineImageDal.Get(m => m.Id == id);
             if (result != null)
             {
-                result.ImagePath = _fileHelper.Update(file, PathConstants.ImagesMedicinePath + result.ImagePath, PathConstants.ImagesMedicinePath);
+                result.ImagePath = _fileHelper.Update(file, PathConstants.ImagesMedicineAddPath + result.ImagePath, PathConstants.ImagesMedicineAddPath);
                 _medicineImageDal.Update(result);
                 return new SuccessResult(Messages.MedicineImageUpdate);
             }

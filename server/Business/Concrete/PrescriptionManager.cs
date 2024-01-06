@@ -18,7 +18,7 @@ namespace Business.Concrete
     {
         private readonly IPrescriptionDal _prescriptionDal;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public PrescriptionManager(IPrescriptionDal prescriptionDal, IHttpContextAccessor httpContextAccessor = null)
+        public PrescriptionManager(IPrescriptionDal prescriptionDal, IHttpContextAccessor httpContextAccessor)
         {
             _prescriptionDal = prescriptionDal;
             _httpContextAccessor = httpContextAccessor;

@@ -11,6 +11,8 @@ namespace Business.Constants
     {
         public static string ImagesDoctorPath = "Uploads/DoctorImages/";
         public static string ImagesMedicinePath = "Uploads/MedicineImages/";
+        public static string ImagesDoctorAddPath = "wwwroot\\Uploads\\DoctorImages\\";
+        public static string ImagesMedicineAddPath = "wwwroot\\Uploads\\MedicineImages\\";
 
     }
 }
