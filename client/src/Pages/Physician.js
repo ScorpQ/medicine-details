@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 import Medicine from '../Services'
 import { Avatar, Badge, Table, Group, Text, Select, Flex } from '@mantine/core'
 
-// 58942282886-12345 58942282887-UNKNOWN
 const Physician = () => {
   let { id } = useParams()
 
@@ -22,8 +21,8 @@ const Physician = () => {
   const rows = reportsData?.data.data.map((item) => (
     <Table.Tr key={item.id}>
       <Table.Td>
-        <Group gap='sm'>
-          <Avatar size={40} src={item.avatar} radius={40} />
+        <Group gap='sm' wrap='nowrap'>
+          <Avatar size={75} src={item.imagePath} radius={10} />
           <div>
             <Text fz='sm' fw={500}>
               {item.medicineName}

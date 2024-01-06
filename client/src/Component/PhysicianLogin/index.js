@@ -1,6 +1,18 @@
 // mantine imports
 import { useDisclosure } from '@mantine/hooks'
-import { Card, Avatar, Text, TextInput, Drawer, Button, Fieldset, Space } from '@mantine/core'
+import {
+  Card,
+  Avatar,
+  Text,
+  TextInput,
+  Drawer,
+  Button,
+  Fieldset,
+  Space,
+  Group,
+  Anchor,
+  PasswordInput,
+} from '@mantine/core'
 import classes from './doctor.css'
 
 import Medicine from '../../Services'
@@ -67,7 +79,7 @@ const PhysicianLogin = () => {
           className={classes.avatar}
         />
         <Text ta='center' h={60} fz='xl' fw={700} mt='sm' mb='sm'>
-          Physician Login
+          Doktor Giriş Paneli
         </Text>
         <Drawer opened={opened} onClose={close} title='Doktor Paneli'>
           <Space h='xl' />
@@ -95,7 +107,12 @@ const PhysicianLogin = () => {
                 Forgot your password?
               </Anchor>
             </Group>
-            <PasswordInput placeholder='Your password' id='your-password' />
+            <PasswordInput
+              placeholder='Your password'
+              id='your-password'
+              value={password}
+              onChange={(event) => setPassword(event.currentTarget.value)}
+            />
             <Space h='xl' />
             <input type='button' value={'Log In'} onClick={login} />
           </Fieldset>

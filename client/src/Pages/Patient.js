@@ -21,14 +21,14 @@ const Patient = () => {
     medicineData.data.data.map((item) => (
       <Table.Tr key={item.id}>
         <Table.Td>
-          <Group gap='sm'>
-            <Avatar size={40} src={item.avatar} radius={40} />
+          <Group gap='sm' wrap='nowrap'>
+            <Avatar size={40} src={item.imagePath} radius={40} />
             <div>
               <Text fz='sm' fw={500}>
                 {item.medicineName}
               </Text>
               <Text fz='xs' c='dimmed'>
-                {item.info}
+                {item.medicineTypeName}
               </Text>
             </div>
           </Group>
@@ -36,13 +36,13 @@ const Patient = () => {
         <Table.Td>
           <Text fz='sm'>{item.departmentName}</Text>
           <Text fz='xs' c='dimmed'>
-            {item.doctorName + ' Sertan'}
+            {item.doctorName + ' ' + item.doctorLastname}
           </Text>
         </Table.Td>
         <Table.Td>
           <Text fz='sm'>{item.timeOfUseName}</Text>
           <Text fz='xs' c='dimmed'>
-            {item.timeOfUse}
+            {`Kullanım miktarı: ${item.timeOfUse}`}
           </Text>
         </Table.Td>
         <Table.Td>
