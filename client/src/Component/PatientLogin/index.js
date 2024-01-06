@@ -68,7 +68,7 @@ const PatientLogin = () => {
         <Text ta='center' h={60} fz='xl' fw={700} mt='sm' mb='sm'>
           Hasta Giriş Paneli
         </Text>
-        <Drawer opened={opened} onClose={close} title='Doktor Paneli'>
+        <Drawer opened={opened} onClose={close} title='Hasta Paneli'>
           <Space h='xl' />
           <Fieldset legend='Kişisel Bilgiler'>
             <TextInput

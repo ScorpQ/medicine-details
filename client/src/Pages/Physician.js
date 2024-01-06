@@ -1,12 +1,34 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Medicine from '../Services'
-import { Avatar, Badge, Table, Group, Text, Select, Flex } from '@mantine/core'
+import { Avatar, Badge, Table, Group, Text, Select, Flex, useMantineTheme, Tabs } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import './table.css'
+
+const user = {
+  name: 'Jane Spoonfighter',
+  email: 'janspoon@fighter.dev',
+  image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png',
+}
+
+const tabs = ['Home', 'Orders', 'Education', 'Community', 'Forums', 'Support', 'Account', 'Helpdesk']
 
 const Physician = () => {
+  // React Hooks
   let { id } = useParams()
-
   const [reportsData, setReportsData] = useState()
+
+  // Mantine hooks
+  const theme = useMantineTheme()
+  const [opened, { toggle }] = useDisclosure(false)
+  const [userMenuOpened, setUserMenuOpened] = useState(false)
+
+  // Mantine Header
+  const items = tabs.map((tab) => (
+    <Tabs.Tab value={tab} key={tab}>
+      {tab}
+    </Tabs.Tab>
+  ))
 
   const getReports = async () => {
     const response = await Medicine.getPhysicianReports(id)
@@ -19,12 +41,12 @@ const Physician = () => {
   }, [])
 
   const rows = reportsData?.data.data.map((item) => (
-    <Table.Tr key={item.id}>
+    <Table.Tr key={item.id} className='tableRow'>
       <Table.Td>
         <Group gap='sm' wrap='nowrap'>
           <Avatar size={75} src={item.imagePath} radius={10} />
           <div>
-            <Text fz='sm' fw={500}>
+            <Text fz='md' fw={500}>
               {item.medicineName}
             </Text>
             <Text fz='xs' c='dimmed'>

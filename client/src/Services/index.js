@@ -36,9 +36,9 @@ const Medicine = {
     }
   },
 
-  getMedicineData: async (id) => {
+  getPatientReports: async (id) => {
     try {
-      const response = await axios.get(`https://localhost:7239/api/Prescriptions/GetDto?TC=${id}`)
+      const response = await axios.get(`https://localhost:7239/api/Prescriptions/GetPatientDto?TC=${id}`)
       console.log(response)
       return response
     } catch (error) {

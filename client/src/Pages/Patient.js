@@ -1,14 +1,59 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Medicine from '../Services'
-import { Avatar, Badge, Table, Group, Text, Select } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import {
+  Avatar,
+  Badge,
+  Table,
+  Group,
+  Text,
+  Select,
+  Container,
+  UnstyledButton,
+  Menu,
+  Tabs,
+  Modal,
+  Button,
+  Burger,
+  rem,
+  useMantineTheme,
+} from '@mantine/core'
+import {
+  IconLogout,
+  IconHeart,
+  IconStar,
+  IconMessage,
+  IconSettings,
+  IconPlayerPause,
+  IconTrash,
+  IconSwitchHorizontal,
+  IconChevronDown,
+} from '@tabler/icons-react'
+import cx from 'clsx'
+import './table.css'
+/*
+const user = {
+  name: 'Jane Spoonfighter',
+  email: 'janspoon@fighter.dev',
+  image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png',
+}
+
+const tabs = ['Home', 'Orders', 'Education', 'Community', 'Forums', 'Support', 'Account', 'Helpdesk']
+*/
+
+const xxx = () => {}
 
 const Patient = () => {
+  // React Hooks
   let { id } = useParams()
   const [medicineData, setMedicineData] = useState()
 
+  // Mantine Hooks
+  const [opened, { open, close }] = useDisclosure(false)
+
   const getMedicine = async () => {
-    const response = await Medicine.getMedicineData(id)
+    const response = await Medicine.getPatientReports(id)
     setMedicineData(response)
   }
 
@@ -19,15 +64,22 @@ const Patient = () => {
   const rows =
     medicineData &&
     medicineData.data.data.map((item) => (
-      <Table.Tr key={item.id}>
+      <Table.Tr
+        key={item.id}
+        className='tableRow'
+        onClick={() => {
+          open()
+          xxx()
+        }}
+      >
         <Table.Td>
           <Group gap='sm' wrap='nowrap'>
-            <Avatar size={40} src={item.imagePath} radius={40} />
+            <Avatar size={75} src={item.imagePath} radius={40} />
             <div>
-              <Text fz='sm' fw={500}>
+              <Badge fz='md' color='blue' radius='md'>
                 {item.medicineName}
-              </Text>
-              <Text fz='xs' c='dimmed'>
+              </Badge>
+              <Text fz='md' c='dimmed'>
                 {item.medicineTypeName}
               </Text>
             </div>
@@ -87,6 +139,9 @@ const Patient = () => {
         Kullanıcı: {medicineData && medicineData.data.data[0].patientName}{' '}
         {medicineData && medicineData.data.data[0].patientLastname}
       </p>
+      <Modal opened={opened} onClose={close} title='Authentication'>
+        asdfasdf
+      </Modal>
     </>
   )
 }
