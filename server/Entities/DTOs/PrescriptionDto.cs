@@ -24,7 +24,8 @@ namespace Entities.DTOs
         public string PatientLastname { get; set; }
         public string MedicineName { get; set; }
         public string DepartmentName { get; set; }
-        public string TimeOfUseName { get; set; }   
+        public string TimeOfUseName { get; set; }
+        public string ImagePath { get; set; }
 
     }
 }
