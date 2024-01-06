@@ -63,5 +63,7 @@ namespace Business.Constants
         public static string MedicineImageUpdate = "Resim Güncellendi";
         public static string DoctorImageUpdate = "Resim Güncellendi";
         public static string DoctorImageNotUpdate = "Resim Güncellenemedi";
+        public static string MedicineTypeGetAll = "İlaç Tipi Listelendi";
+        public static string MedicineTypeAdded = "İlaç Tipi Eklendi";
     }
 }

@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Medicine : IEntity
+    public class MedicineType :IEntity
     {
         public int Id { get; set; }
-        public string MedicineName { get; set; }
-        public int MedicineType { get; set; }
-        public int DepartmentId { get; set; }
-        
+        public string MedicineTypeName { get; set; }
     }
 }

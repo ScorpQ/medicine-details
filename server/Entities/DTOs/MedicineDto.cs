@@ -11,6 +11,7 @@ namespace Entities.DTOs
     {
         public int Id { get; set; }
         public string MedicineName { get; set; }
+        public int MedicineTypeId { get; set; }
         public int DepartmentId { get; set; }
     }
 }

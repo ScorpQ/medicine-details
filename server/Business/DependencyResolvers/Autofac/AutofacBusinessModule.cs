@@ -49,6 +49,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<MedicineDetailManager>().As<IMedicineDetailService>().SingleInstance();
             builder.RegisterType<EfMedicineDetailDal>().As<IMedicineDetailDal>().SingleInstance();
 
+            builder.RegisterType<MedicineTypeManager>().As<IMedicineTypeService>().SingleInstance();
+            builder.RegisterType<EfMedicineTypeDal>().As<IMedicineTypeDal>().SingleInstance();
+
             builder.RegisterType<DoctorImageManager>().As<IDoctorImageService>().SingleInstance();
             builder.RegisterType<EfDoctorImageDal>().As<IDoctorImageDal>().SingleInstance();
             builder.RegisterType<MedicineImageManager>().As<IMedicineImageService>().SingleInstance();
