@@ -9,8 +9,8 @@ namespace Business.Constants
     public class PathConstants
 
     {
-        public static string ImagesDoctorPath = "wwwroot\\Uploads\\DoctorImages\\";
-        public static string ImagesMedicinePath = "wwwroot\\Uploads\\MedicineImages\\";
+        public static string ImagesDoctorPath = "Uploads/DoctorImages/";
+        public static string ImagesMedicinePath = "Uploads/MedicineImages/";
 
     }
 }

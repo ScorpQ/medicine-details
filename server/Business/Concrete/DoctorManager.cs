@@ -8,6 +8,7 @@ using Core.Utilities.Security.Hashing;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.DTOs;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +19,13 @@ namespace Business.Concrete
 {
     public class DoctorManager :IDoctorService
     {
-        IDoctorDal _doctorDal;
+        private readonly IDoctorDal _doctorDal;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public DoctorManager(IDoctorDal doctorDal)
+        public DoctorManager(IDoctorDal doctorDal, IHttpContextAccessor httpContextAccessor)
         {
             _doctorDal = doctorDal;
+            _httpContextAccessor = httpContextAccessor;
         }
 
 
@@ -32,7 +35,7 @@ namespace Business.Concrete
             _doctorDal.Add(doctor);
         }
 
-        public IResult Delete(int id)
+        public Core.Utilities.Results.IResult Delete(int id)
         {
             var doctor = _doctorDal.Get(p => p.Id == id);
             if (doctor != null)
@@ -58,10 +61,18 @@ namespace Business.Concrete
 
         public IDataResult<List<DoctorImageDto>> GetDoctorImage(string TC)
         {
-            return new DataResult<List<DoctorImageDto>>(_doctorDal.GetDoctorImageDto(TC), true, Messages.UserGetAll);
+            string baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
+            var doctor = _doctorDal.GetDoctorImageDto(TC).ToList();
+
+            doctor.ForEach(d =>
+            {
+                d.ImagePath = $"{baseUrl}/{PathConstants.ImagesDoctorPath}{d.ImagePath}";
+            });
+
+            return new DataResult<List<DoctorImageDto>>(doctor, true, Messages.UserGetAll);
         }
 
-        public IResult Update(string TC, string oldPassword, string newPassword)
+        public Core.Utilities.Results.IResult Update(string TC, string oldPassword, string newPassword)
         {
             var result = _doctorDal.Get(p => p.TC == TC);
             if (!HashingHelper.VerifyPasswordHash(oldPassword, result.PasswordHash, result.PasswordSalt))

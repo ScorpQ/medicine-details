@@ -29,22 +29,16 @@ namespace API.Controllers
                 return BadRequest(result.Message);
             }
         }
-
-        [HttpGet("GetByDoctorId")]
-        public IActionResult GetByCarId(int id)
+        [HttpGet("GetById")]
+        public IActionResult GetById(int id)
         {
-            var result = _medicineImageService.GetId(id);
-
+            var result = _medicineImageService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
             }
-            else
-            {
-                return BadRequest(result.Message);
-            }
+            return BadRequest(result);
         }
-
         [HttpPost("AddImage")]
         public IActionResult AddImage(IFormFile formFile, int id)
         {

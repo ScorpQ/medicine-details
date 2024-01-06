@@ -20,11 +20,12 @@ namespace Business.Concrete
     {
         private readonly IDoctorImageDal _doctorImageDal;
         private readonly IFileHelper _fileHelper;
-
-        public DoctorImageManager(IFileHelper fileHelper, IDoctorImageDal doctorImageDal)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public DoctorImageManager(IFileHelper fileHelper, IDoctorImageDal doctorImageDal, IHttpContextAccessor httpContextAccessor)
         {
             _fileHelper = fileHelper;
             _doctorImageDal = doctorImageDal;
+            _httpContextAccessor = httpContextAccessor;
         }
         public IResult Add(IFormFile file, int id)
         {
@@ -52,17 +53,35 @@ namespace Business.Concrete
 
         public IDataResult<List<DoctorImage>> GetAll()
         {
-            return new DataResult<List<DoctorImage>>(_doctorImageDal.GetAll(), true, Messages.DoctorImageAllListed);
+            var images = _doctorImageDal.GetAll();
+
+            images.ForEach(image =>
+            {
+
+                string baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
+                image.ImagePath = $"{baseUrl}/{PathConstants.ImagesDoctorPath}{image.ImagePath}";
+            });
+
+            return new DataResult<List<DoctorImage>>(images, true, Messages.DoctorImageAllListed);
+            
         }
 
-        public IDataResult<List<DoctorImage>> GetId(int id)
+        public IDataResult<List<DoctorImage>> GetById(int id)
         {
             var result = BusinessRules.Run(CheckImage(id));
             if (result != null)
             {
                 return new ErrorDataResult<List<DoctorImage>>(GetDefaultImage(id).Data, false, Messages.ImageNotFound);
             }
-            return new DataResult<List<DoctorImage>>(_doctorImageDal.GetAll(d => d.DoctorId == id), true, Messages.DoctorImageListed);
+
+            var images = _doctorImageDal.GetAll(d => d.DoctorId == id);
+            images.ForEach(image =>
+            {
+                string baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
+                image.ImagePath = $"{baseUrl}/{PathConstants.ImagesMedicinePath}{image.ImagePath}";
+            });
+
+            return new DataResult<List<DoctorImage>>(images, true, Messages.MedicineImageListed);
         }
 
         public IResult Update(IFormFile file, int id)
@@ -89,8 +108,13 @@ namespace Business.Concrete
 
         private IDataResult<List<DoctorImage>> GetDefaultImage(int id)
         {
-            List<DoctorImage> doctorImage = new List<DoctorImage>();
-            doctorImage.Add(new DoctorImage { DoctorId = id, ImagePath = "DefaultImage.jpg" });
+            string baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
+            string defaultImageUrl = $"{baseUrl}/{PathConstants.ImagesDoctorPath}{"DefaultImage.jpg"}";
+            List<DoctorImage> doctorImage = new List<DoctorImage>
+    {
+        new DoctorImage { DoctorId = id, ImagePath = defaultImageUrl }
+    };
+
             return new SuccessDataResult<List<DoctorImage>>(doctorImage);
         }
     }

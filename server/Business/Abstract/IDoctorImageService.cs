@@ -16,6 +16,6 @@ namespace Business.Abstract
         IResult Delete(int id);
         IResult Update(IFormFile file, int id);
         IDataResult<List<DoctorImage>> GetAll();
-        IDataResult<List<DoctorImage>> GetId(int id);
+        IDataResult<List<DoctorImage>> GetById(int id);
     }
 }

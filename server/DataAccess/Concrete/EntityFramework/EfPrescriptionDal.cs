@@ -12,6 +12,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfPrescriptionDal : EfEntityRepositoryBase<Prescription, DBContext>, IPrescriptionDal
     {
+
         public List<PrescriptionDto> GetDoctorDto()
         {
             using (DBContext context = new DBContext())

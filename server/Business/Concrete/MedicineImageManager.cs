@@ -19,11 +19,13 @@ namespace Business.Concrete
     {
         private readonly IMedicineImageDal _medicineImageDal;
         private readonly IFileHelper _fileHelper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public MedicineImageManager(IFileHelper fileHelper, IMedicineImageDal medicineImageDal)
+        public MedicineImageManager(IFileHelper fileHelper, IMedicineImageDal medicineImageDal, IHttpContextAccessor httpContextAccessor)
         {
             _fileHelper = fileHelper;
             _medicineImageDal = medicineImageDal;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public IResult Add(IFormFile file, int id)
@@ -53,8 +55,18 @@ namespace Business.Concrete
 
         public IDataResult<List<MedicineImage>> GetAll()
         {
-            return new DataResult<List<MedicineImage>>(_medicineImageDal.GetAll(), true, Messages.MedicineImageAllListed);
+            var images = _medicineImageDal.GetAll();
+
+            images.ForEach(image =>
+            {
+               
+                string baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
+                image.ImagePath = $"{baseUrl}/{PathConstants.ImagesMedicinePath}{image.ImagePath}";
+            });
+
+            return new DataResult<List<MedicineImage>>(images, true, Messages.MedicineImageListed);
         }
+
 
         public IDataResult<List<MedicineImage>> GetId(int id)
         {
@@ -66,7 +78,25 @@ namespace Business.Concrete
             return new DataResult<List<MedicineImage>>(_medicineImageDal.GetAll(m => m.MedicineId == id), true, Messages.MedicineImageListed);
         }
 
-        public IResult Update(IFormFile file, int id)
+        public IDataResult<List<MedicineImage>> GetById(int id)
+        {
+            var result = BusinessRules.Run(CheckImage(id));
+            if (result != null)
+            {
+                return new ErrorDataResult<List<MedicineImage>>(GetDefaultImage(id).Data, false, Messages.ImageNotFound);
+            }
+
+            var images = _medicineImageDal.GetAll(m => m.MedicineId == id);
+            images.ForEach(image =>
+            {
+                string baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
+                image.ImagePath = $"{baseUrl}/{PathConstants.ImagesMedicinePath}{image.ImagePath}";
+            });
+
+            return new DataResult<List<MedicineImage>>(images, true, Messages.MedicineImageListed);
+        }
+
+            public IResult Update(IFormFile file, int id)
         {
             var result = _medicineImageDal.Get(m => m.Id == id);
             if (result != null)
@@ -90,9 +120,16 @@ namespace Business.Concrete
 
         private IDataResult<List<MedicineImage>> GetDefaultImage(int id)
         {
-            List<MedicineImage> medicineImage = new List<MedicineImage>();
-            medicineImage.Add(new MedicineImage { MedicineId=id, ImagePath = "DefaultImage.jpg" });
+            string baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
+            string defaultImageUrl = $"{baseUrl}/{PathConstants.ImagesMedicinePath}{"DefaultImage.jpg"}";
+            List<MedicineImage> medicineImage = new List<MedicineImage>
+    {
+        new MedicineImage { MedicineId = id, ImagePath = defaultImageUrl }
+    };
+
             return new SuccessDataResult<List<MedicineImage>>(medicineImage);
         }
+
+
     }
 }

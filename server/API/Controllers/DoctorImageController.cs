@@ -31,9 +31,9 @@ namespace API.Controllers
         }
 
         [HttpGet("GetByDoctorId")]
-        public IActionResult GetByCarId(int id)
+        public IActionResult GetByDoctorId(int id)
         {
-            var result = _doctorImageService.GetId(id);
+            var result = _doctorImageService.GetById(id);
 
             if (result.Success)
             {
