@@ -17,7 +17,7 @@ namespace Business.Abstract
         IResult Add(Prescription prescription);
         IResult Update(Prescription prescription);
         IResult Delete(int id);
-        IDataResult<List<PrescriptionDto>> GetDtoDetails(string TC);
+        IDataResult<List<PrescriptionDto>> GetDtoPatientDetails(string TC);
 
         IDataResult<List<PrescriptionDto>> GetDtoDoctorDetails(string TC);
 

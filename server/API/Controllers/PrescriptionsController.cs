@@ -70,19 +70,18 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet("GetDto")]
-        public IActionResult GetDto(string TC)
+        [HttpGet("GetPatientDto")]
+        public IActionResult GetPatientDto(string TC)
         {
 
-            return Ok(_prescriptionService.GetDtoDetails(TC));
+            return Ok(_prescriptionService.GetDtoPatientDetails(TC));
 
         }
 
 
         [HttpGet("GetDoctorDto")]
         public IActionResult GetDoctorDto(string TC)
-        {
-
+        {   
             return Ok(_prescriptionService.GetDtoDoctorDetails(TC));
 
         }

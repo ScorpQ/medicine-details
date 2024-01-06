@@ -50,14 +50,14 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Prescription>>(_prescriptionDal.GetAll(p => p.PatientTC.Equals(TC)), Messages.PrescriptionListedByTC);
         }
 
-        public IDataResult<List<PrescriptionDto>> GetDtoDetails(string TC)
+        public IDataResult<List<PrescriptionDto>> GetDtoPatientDetails(string TC)
         {
-            return new  DataResult<List<PrescriptionDto>>(_prescriptionDal.GetDto(TC),true ,Messages.PrescriptionDtoListed);
+            return new DataResult<List<PrescriptionDto>>(_prescriptionDal.GetPatientDto().Where(p => p.PatientTC == TC).ToList(), true, Messages.PrescriptionDtoListed); ;
         }
 
         public IDataResult<List<PrescriptionDto>> GetDtoDoctorDetails(string TC)
         {
-            return new DataResult<List<PrescriptionDto>>(_prescriptionDal.GetDoctorDto(TC), true, Messages.PrescriptionDtoListed);
+            return new DataResult<List<PrescriptionDto>>(_prescriptionDal.GetDoctorDto().Where(d=>d.DoctorTC==TC).ToList(), true, Messages.PrescriptionDtoListed);
         }
 
         public IResult Update(Prescription prescription)

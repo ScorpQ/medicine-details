@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfPrescriptionDal : EfEntityRepositoryBase<Prescription, DBContext>, IPrescriptionDal
     {
-        public List<PrescriptionDto> GetDoctorDto(string TC)
+        public List<PrescriptionDto> GetDoctorDto()
         {
             using (DBContext context = new DBContext())
             {
@@ -22,9 +22,8 @@ namespace DataAccess.Concrete.EntityFramework
                              join m in context.Medicines on p.MedicineId equals m.Id
                              join department in context.Departments on d.DepartmentId equals department.Id
                              join t in context.TimeOfUses on p.TimeOfUse equals t.Id
-                             join img in context.MedicineImages on m.Id equals img.MedicineId
                              join mt in context.MedicineTypes on m.MedicineType equals mt.Id
-                             where d.TC == TC
+                             join img in context.MedicineImages on m.Id equals img.MedicineId
                              select new PrescriptionDto
                              {
                                  Id = p.Id,
@@ -51,7 +50,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public List<PrescriptionDto> GetDto(string TC)
+        public List<PrescriptionDto> GetPatientDto()
         {
             using (DBContext context = new DBContext())
             {
@@ -61,9 +60,8 @@ namespace DataAccess.Concrete.EntityFramework
                              join m in context.Medicines on p.MedicineId equals m.Id
                              join department in context.Departments on d.DepartmentId equals department.Id
                              join t in context.TimeOfUses on p.TimeOfUse equals t.Id
-                             join img in context.MedicineImages on m.Id equals img.MedicineId
                              join mt in context.MedicineTypes on m.MedicineType equals mt.Id
-                             where p.PatientTC==TC
+                             join img in context.MedicineImages on m.Id equals img.MedicineId
                              select new PrescriptionDto
                              {
                                  Id = p.Id,
