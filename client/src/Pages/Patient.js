@@ -42,12 +42,11 @@ const user = {
 const tabs = ['Home', 'Orders', 'Education', 'Community', 'Forums', 'Support', 'Account', 'Helpdesk']
 */
 
-const xxx = () => {}
-
 const Patient = () => {
   // React Hooks
   let { id } = useParams()
   const [medicineData, setMedicineData] = useState()
+  const [selectedMedicine, setSelectedMedicine] = useState()
 
   // Mantine Hooks
   const [opened, { open, close }] = useDisclosure(false)
@@ -69,7 +68,7 @@ const Patient = () => {
         className='tableRow'
         onClick={() => {
           open()
-          xxx()
+          setSelectedMedicine(item)
         }}
       >
         <Table.Td>
@@ -139,8 +138,8 @@ const Patient = () => {
         Kullanıcı: {medicineData && medicineData.data.data[0].patientName}{' '}
         {medicineData && medicineData.data.data[0].patientLastname}
       </p>
-      <Modal opened={opened} onClose={close} title='Authentication'>
-        asdfasdf
+      <Modal opened={opened} onClose={close} title='İlaç Bilgi'>
+        {selectedMedicine?.medicineName}
       </Modal>
     </>
   )

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Medicine from '../Services'
-import { Avatar, Badge, Table, Group, Text, Select, Flex, useMantineTheme, Tabs } from '@mantine/core'
+import { Avatar, Badge, Table, Modal, Group, Text, Select, Flex, useMantineTheme, Tabs } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import './table.css'
 
@@ -13,6 +13,10 @@ const user = {
 
 const tabs = ['Home', 'Orders', 'Education', 'Community', 'Forums', 'Support', 'Account', 'Helpdesk']
 
+const xxx = (item) => {
+  console.log(`Benim veri: ${item}`)
+}
+
 const Physician = () => {
   // React Hooks
   let { id } = useParams()
@@ -20,8 +24,8 @@ const Physician = () => {
 
   // Mantine hooks
   const theme = useMantineTheme()
-  const [opened, { toggle }] = useDisclosure(false)
   const [userMenuOpened, setUserMenuOpened] = useState(false)
+  const [opened, { open, close }] = useDisclosure(false)
 
   // Mantine Header
   const items = tabs.map((tab) => (
@@ -41,7 +45,14 @@ const Physician = () => {
   }, [])
 
   const rows = reportsData?.data.data.map((item) => (
-    <Table.Tr key={item.id} className='tableRow'>
+    <Table.Tr
+      key={item.id}
+      className='tableRow'
+      onClick={() => {
+        open()
+        xxx(item)
+      }}
+    >
       <Table.Td>
         <Group gap='sm' wrap='nowrap'>
           <Avatar size={75} src={item.imagePath} radius={10} />
@@ -108,6 +119,9 @@ const Physician = () => {
       <p>
         Kullanıcı: {reportsData?.data.data[0]?.doctorName} {reportsData?.data.data[0]?.doctorLastname}
       </p>
+      <Modal opened={opened} onClose={close} title='İlaç Bilgi'>
+        asdfasdf
+      </Modal>
     </>
   )
 }
