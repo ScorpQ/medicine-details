@@ -5,6 +5,7 @@ import { useDisclosure } from '@mantine/hooks'
 import {
   Avatar,
   Badge,
+  Box,
   Table,
   Group,
   Text,
@@ -73,21 +74,23 @@ const Patient = () => {
       >
         <Table.Td>
           <Group gap='sm' wrap='nowrap'>
-            <Avatar size={75} src={item.imagePath} radius={40} />
-            <div>
+            <Avatar className='imgScale' bg='white' size={95} src={item.imagePath} radius={10} />
+            <Box>
               <Badge fz='md' color='blue' radius='md'>
                 {item.medicineName}
               </Badge>
-              <Text fz='md' c='dimmed'>
+              <Text fz='md' c='dimmed' pl={10}>
                 {item.medicineTypeName}
               </Text>
-            </div>
+            </Box>
           </Group>
         </Table.Td>
         <Table.Td>
-          <Text fz='sm'>{item.departmentName}</Text>
-          <Text fz='xs' c='dimmed'>
-            {item.doctorName + ' ' + item.doctorLastname}
+          <Text fz='md' fw={500}>
+            {`Dr. ${item.doctorName} ${item.doctorLastname}`}
+          </Text>
+          <Text fz='sm' c='dimmed'>
+            {item.departmentName}
           </Text>
         </Table.Td>
         <Table.Td>
@@ -124,7 +127,7 @@ const Patient = () => {
           <Table.Thead>
             <Table.Tr>
               <Table.Th>İlaçlar</Table.Th>
-              <Table.Th>Departman</Table.Th>
+              <Table.Th>Hastane</Table.Th>
               <Table.Th>Kullanım Vakti</Table.Th>
               <Table.Th>Bilgi</Table.Th>
               <Table.Th>Başlangıç Tarihi</Table.Th>

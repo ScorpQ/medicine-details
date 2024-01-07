@@ -19,4 +19,8 @@
 
 .tableRow:hover {
   cursor: pointer;
+  background-color: rgb(231, 236, 242);
+}
+.imgScale {
+  transform: scale(1.2);
 }
