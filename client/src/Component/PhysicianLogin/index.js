@@ -104,17 +104,19 @@ const PhysicianLogin = () => {
               </Text>
 
               <Anchor href='#' onClick={(event) => event.preventDefault()} pt={2} fw={500} fz='xs'>
-                Forgot your password?
+                Şifreni mi unuttun?
               </Anchor>
             </Group>
             <PasswordInput
-              placeholder='Your password'
+              placeholder='XXXXX'
               id='your-password'
               value={password}
               onChange={(event) => setPassword(event.currentTarget.value)}
             />
             <Space h='xl' />
-            <input type='button' value={'Log In'} onClick={login} />
+            <Button onClick={login} variant='gradient' gradient={{ from: 'green', to: 'indigo', deg: 91 }}>
+              Giriş
+            </Button>
           </Fieldset>
         </Drawer>
 

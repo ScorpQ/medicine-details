@@ -13,6 +13,8 @@ import {
   Container,
   UnstyledButton,
   Menu,
+  Flex,
+  Mark,
   Tabs,
   Modal,
   Button,
@@ -75,7 +77,7 @@ const Patient = () => {
         <Table.Td>
           <Group gap='sm' wrap='nowrap'>
             <Avatar className='imgScale' bg='white' size={95} src={item.imagePath} radius={10} />
-            <Box>
+            <Box pl={15}>
               <Badge fz='md' color='blue' radius='md'>
                 {item.medicineName}
               </Badge>
@@ -94,26 +96,45 @@ const Patient = () => {
           </Text>
         </Table.Td>
         <Table.Td>
-          <Text fz='sm'>{item.timeOfUseName}</Text>
-          <Text fz='xs' c='dimmed'>
-            {`Kullanım miktarı: ${item.timeOfUse}`}
+          <Text fz='md'>{item.timeOfUseName}</Text>
+          <Text fz='md' c='dimmed' td='underline'>
+            Kullanım miktarı:{' '}
+            <Text display='inline' c='blue'>
+              {item.timeOfUse}
+            </Text>
           </Text>
         </Table.Td>
         <Table.Td>
-          <Text fz='sm'>{item.info}</Text>
-          <Text fz='xs' c='dimmed'>
-            Prospektüs
-          </Text>
+          <Text fz='md'>{item.info}</Text>
+          <Badge color='green' size='md' fz='xs'>
+            Kullanım Talimati
+          </Badge>
         </Table.Td>
         <Table.Td>
-          <Text fz='sm'>{item.startDate}</Text>
-          <Text fz='xs' c='dimmed'>
+          <Badge size='lg' fz='md' fw={500}>
+            {/*console.log(
+              Date(item.endDate) > Date() ? Date(item.endDate) + ' X ' + Date() : Date(item.endDate) + ' X ' + Date()
+            )*/}
+            {item.startDate.slice(0, 10)}
+          </Badge>
+          <Text fz='md' c='dimmed' pl={15}>
             Başlangıç
           </Text>
         </Table.Td>
         <Table.Td>
-          <Text fz='sm'>{item.endDate}</Text>
-          <Text fz='xs' c='dimmed'>
+          {/*Date().toString() > item.endDate ? (
+            <Badge size='lg' fz='md' fw={500} bg='#d10000'>
+              {item.endDate.slice(0, 10)}
+            </Badge>
+          ) : (
+            <Badge fz='md' fw={500}>
+              {item.endDate.slice(0, 10)}
+            </Badge>
+          )*/}
+          <Badge size='lg' fz='md' fw={500} bg='#d10000'>
+            {item.endDate.slice(0, 10)}
+          </Badge>
+          <Text fz='md' c='dimmed' pl={35}>
             Bitiş
           </Text>
         </Table.Td>
@@ -125,7 +146,7 @@ const Patient = () => {
       <Table.ScrollContainer minWidth={800}>
         <Table verticalSpacing='sm'>
           <Table.Thead>
-            <Table.Tr>
+            <Table.Tr fz='lg' fw={900}>
               <Table.Th>İlaçlar</Table.Th>
               <Table.Th>Hastane</Table.Th>
               <Table.Th>Kullanım Vakti</Table.Th>
@@ -142,6 +163,7 @@ const Patient = () => {
         {medicineData && medicineData.data.data[0].patientLastname}
       </p>
       <Modal opened={opened} onClose={close} title='İlaç Bilgi'>
+        {console.log(selectedMedicine)}
         {selectedMedicine?.medicineName}
       </Modal>
     </>

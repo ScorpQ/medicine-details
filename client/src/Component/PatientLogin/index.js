@@ -95,13 +95,15 @@ const PatientLogin = () => {
               </Anchor>
             </Group>
             <PasswordInput
-              placeholder='Your password'
+              placeholder='XXXXX'
               id='your-password'
               value={password}
               onChange={(event) => setPassword(event.currentTarget.value)}
             />
             <Space h='xl' />
-            <input type='button' value={'Log In'} onClick={login} />
+            <Button onClick={login} variant='gradient' gradient={{ from: 'green', to: 'indigo', deg: 91 }}>
+              Giriş
+            </Button>
           </Fieldset>
         </Drawer>
 

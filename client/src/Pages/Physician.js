@@ -79,7 +79,7 @@ const Physician = () => {
         </Text>
       </Table.Td>
       <Table.Td>
-        <Text fz='sm'>{item.info}</Text>
+        <Text fz='lg'>{item.info}</Text>
         <Text fz='xs' c='dimmed'>
           Prospektüs
         </Text>
