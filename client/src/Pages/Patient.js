@@ -63,8 +63,8 @@ const Patient = () => {
     setMedicineData(response)
   }
 
-  const getDetails = async (id) => {
-    const response = await Medicine.getMedicineDetails(id)
+  const getDetails = async (id, pid) => {
+    const response = await Medicine.getMedicineDetails(id, pid)
     console.log(response)
     setSelectedMedicine(response)
   }
@@ -81,7 +81,7 @@ const Patient = () => {
         className='tableRow'
         onClick={() => {
           open()
-          getDetails(item.medicineId)
+          getDetails(item.medicineId, item.id)
         }}
       >
         <Table.Td>
@@ -182,6 +182,7 @@ const Patient = () => {
         {selectedMedicine?.data?.data[0].medicineId}
         {selectedMedicine?.data?.data[0].medicineName}
         {selectedMedicine?.data?.data[0].webSite}
+        {selectedMedicine?.data?.data[0].doctorPrescriptionInfo}
         */}
         <Card withBorder radius='md' className='card'>
           <Card.Section className='imageSection'>
@@ -202,26 +203,22 @@ const Patient = () => {
                 {`İlaç ID: ${selectedMedicine?.data?.data[0].medicineId}`}
               </Text>
             </div>
-            <Badge variant='outline'>Antibiyotik</Badge>
+            <Badge variant='outline'>{selectedMedicine?.data?.data[0].medicineTypeName}</Badge>
           </Group>
 
           <Card.Section className='section' mt='md'>
             <Text fz='sm' c='dimmed' className='label'>
-              Basic configuration
+              {selectedMedicine?.data?.data[0].doctorPrescriptionInfo}
             </Text>
-
-            <Group gap={8} mb={-8}></Group>
           </Card.Section>
 
-          <Card.Section className='section'>
-            <Group gap={30}>
-              <Button radius='xl' mx={25} style={{ flex: 1 }}>
-                <Anchor c='white' href={selectedMedicine?.data?.data[0].webSite}>
-                  Prospektüs
-                </Anchor>
-              </Button>
-            </Group>
-          </Card.Section>
+          <Group justify='stretch' mt={50}>
+            <Button radius='xl' mx={25} style={{ width: '-webkit-fill-available' }}>
+              <Anchor c='white' href={selectedMedicine?.data?.data[0].webSite}>
+                Prospektüs
+              </Anchor>
+            </Button>
+          </Group>
         </Card>
       </Modal>
     </>
