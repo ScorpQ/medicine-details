@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Medicine from '../Services'
+import { IconChevronRight } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
 import {
   Avatar,
@@ -155,6 +156,26 @@ const Patient = () => {
 
   return (
     <>
+      <UnstyledButton className='ab' pl={10} pt={10}>
+        <Group>
+          <Avatar
+            src='https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-3.png'
+            radius='xl'
+          />
+          <div style={{ flex: 1 }}>
+            <Text size='sm' fw={500}>
+              {medicineData?.data?.data[0].patientName} {medicineData?.data?.data[0].patientLastname}
+            </Text>
+
+            <Text c='dimmed' size='xs'>
+              {`Kimlik Numarası: ${medicineData?.data?.data[0].patientTC}`}
+              {console.log(medicineData)}
+            </Text>
+          </div>
+
+          <IconChevronRight />
+        </Group>
+      </UnstyledButton>
       <Table.ScrollContainer minWidth={800}>
         <Table verticalSpacing='sm'>
           <Table.Thead>
@@ -170,10 +191,6 @@ const Patient = () => {
           <Table.Tbody>{rows}</Table.Tbody>
         </Table>
       </Table.ScrollContainer>
-      <p>
-        Kullanıcı: {medicineData && medicineData.data.data[0].patientName}{' '}
-        {medicineData && medicineData.data.data[0].patientLastname}
-      </p>
       <Modal opened={opened} onClose={close} title='İlaç Bilgi'>
         {/* 
         {console.log(selectedMedicine?.data?.data[0])}
@@ -214,7 +231,7 @@ const Patient = () => {
 
           <Group justify='stretch' mt={50}>
             <Button radius='xl' mx={25} style={{ width: '-webkit-fill-available' }}>
-              <Anchor c='white' href={selectedMedicine?.data?.data[0].webSite}>
+              <Anchor c='white' href={selectedMedicine?.data?.data[0].webSite} target='_blank'>
                 Prospektüs
               </Anchor>
             </Button>
