@@ -55,6 +55,15 @@ const Medicine = {
       alert(error)
     }
   },
+
+  getMedicineDetails: async (id) => {
+    try {
+      const response = await axios.get(`https://localhost:7239/api/MedicineDetails/GetId?id=${id}`)
+      return response
+    } catch (error) {
+      alert(error)
+    }
+  },
 }
 
 export default Medicine

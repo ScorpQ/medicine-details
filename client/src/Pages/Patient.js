@@ -59,6 +59,11 @@ const Patient = () => {
     setMedicineData(response)
   }
 
+  const getDetails = async (id) => {
+    const response = await Medicine.getMedicineDetails(id)
+    setSelectedMedicine(response)
+  }
+
   useEffect(() => {
     getMedicine()
   }, [])
@@ -71,7 +76,7 @@ const Patient = () => {
         className='tableRow'
         onClick={() => {
           open()
-          setSelectedMedicine(item)
+          getDetails(item.medicineId)
         }}
       >
         <Table.Td>
@@ -105,10 +110,12 @@ const Patient = () => {
           </Text>
         </Table.Td>
         <Table.Td>
-          <Text fz='md'>{item.info}</Text>
           <Badge color='green' size='md' fz='xs'>
             Kullanım Talimati
           </Badge>
+          <Text pl={5} fz='md'>
+            {item.info}
+          </Text>
         </Table.Td>
         <Table.Td>
           <Badge size='lg' fz='md' fw={500}>
@@ -163,8 +170,12 @@ const Patient = () => {
         {medicineData && medicineData.data.data[0].patientLastname}
       </p>
       <Modal opened={opened} onClose={close} title='İlaç Bilgi'>
-        {console.log(selectedMedicine)}
-        {selectedMedicine?.medicineName}
+        {console.log(selectedMedicine?.data?.data[0])}
+        {selectedMedicine?.data?.data[0].id}
+        {selectedMedicine?.data?.data[0].imagePath}
+        {selectedMedicine?.data?.data[0].medicineId}
+        {selectedMedicine?.data?.data[0].medicineName}
+        {selectedMedicine?.data?.data[0].webSite}
       </Modal>
     </>
   )

@@ -58,7 +58,7 @@ const PatientLogin = () => {
       <Card withBorder padding='xl' radius='md' className={classes.card} w={400}>
         <Card.Section h={200} style={imageStyle} />
         <Avatar
-          src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwjl_0ttoVTkLx-8yOgl4U3MJ9ByjsqsQhzZ3tXq4Ca5Hd2Gsx0zcaIfnLpSV5UAFI_8E&usqp=CAU'
+          src='https://media.istockphoto.com/id/1097493802/vector/patient-icon-customer-icon-with-add-additional-sign-patient-icon-and-new-plus-positive.jpg?s=612x612&w=0&k=20&c=IrugHP6i-oobykGTLg7kCHP-SPENaDFxhQKAIdM9XuI='
           size={80}
           radius={90}
           mx='auto'
@@ -108,7 +108,7 @@ const PatientLogin = () => {
         </Drawer>
 
         <Button size='lg' onClick={open} variant='gradient' gradient={{ from: 'teal', to: 'blue', deg: 121 }}>
-          Physician
+          Patient
         </Button>
       </Card>
     </>
