@@ -6,6 +6,7 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,13 +31,13 @@ namespace DataAccess.Concrete.EntityFramework
                                  WebSite = md.WebSite,
                                  ImagePath =img.ImagePath,
                                  MedicineTypeId = mt.Id,
-                                 MedicineTypeName = mt.MedicineTypeName
+                                 MedicineTypeName = mt.MedicineTypeName,
                              };
                 return result.ToList();
             }
         }
 
-        public List<MedicineDetailsDto> GetMedicineDetails(int id)
+        public List<MedicineDetailsDto> GetMedicineDetails(int id,int pid)
         {
             using (DBContext context = new DBContext())
             {
@@ -44,6 +45,7 @@ namespace DataAccess.Concrete.EntityFramework
                              join m in context.Medicines on md.MedicineId equals m.Id
                              join img in context.MedicineImages on m.Id equals img.MedicineId
                              join mt in context.MedicineTypes on m.MedicineType equals mt.Id
+                             join p in context.Prescriptions on pid equals p.Id
                              where md.MedicineId==id
                              select new MedicineDetailsDto
                              {
@@ -54,7 +56,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  WebSite = md.WebSite,
                                  ImagePath = img.ImagePath,
                                  MedicineTypeId=mt.Id,
-                                 MedicineTypeName=mt.MedicineTypeName
+                                 MedicineTypeName=mt.MedicineTypeName,
+                                 DoctorPrescriptionInfo=p.Info,  
                              };
                 return result.ToList();
             }

@@ -29,9 +29,9 @@ namespace API.Controllers
             }
         }
         [HttpGet("GetId")]
-        public IActionResult GetId(int id)
+        public IActionResult GetId(int id, int pid)
         {
-            var result = _medicineDetailService.GetById(id);
+            var result = _medicineDetailService.GetById(id, pid);
             if (result.Success)
             {
                 return Ok(result);

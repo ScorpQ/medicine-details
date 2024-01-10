@@ -26,9 +26,9 @@ namespace Business.Concrete
         {
             return new DataResult<List<MedicineDetailsDto>>(_medicineDetailDal.GetAllMedicineDetails(), true, Messages.MedicineDetailListed);
         }
-        public IDataResult<List<MedicineDetailsDto>> GetById(int id)
+        public IDataResult<List<MedicineDetailsDto>> GetById(int id, int pid)
         {
-            return new DataResult<List<MedicineDetailsDto>>(_medicineDetailDal.GetMedicineDetails(id), true, Messages.MedicineDetailListed);
+            return new DataResult<List<MedicineDetailsDto>>(_medicineDetailDal.GetMedicineDetails(id,pid), true, Messages.MedicineDetailListed);
         }
         public IResult Add(MedicineDetail medicineDetail)
         {

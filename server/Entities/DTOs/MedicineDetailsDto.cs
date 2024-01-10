@@ -17,5 +17,6 @@ namespace Entities.DTOs
         public string ImagePath { get; set; }
         public int MedicineTypeId { get; set; }
         public string MedicineTypeName { get; set; }
+        public string DoctorPrescriptionInfo { get; set; }
     }
 }

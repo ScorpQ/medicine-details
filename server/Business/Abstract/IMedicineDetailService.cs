@@ -11,7 +11,7 @@ namespace Business.Abstract
 {
     public interface IMedicineDetailService
     {
-        IDataResult<List<MedicineDetailsDto>> GetById(int id);
+        IDataResult<List<MedicineDetailsDto>> GetById(int id,int pid);
         IDataResult<List<MedicineDetailsDto>> GetAll();
         IResult Add(MedicineDetail medicineDetail);
         IResult Update(MedicineDetail medicineDetail);

@@ -11,7 +11,7 @@ namespace DataAccess.Abstract
 {
     public interface IMedicineDetailDal : IEntityRepository<MedicineDetail>
     {
-        List<MedicineDetailsDto> GetMedicineDetails(int id);
+        List<MedicineDetailsDto> GetMedicineDetails(int id,int pid);
         List<MedicineDetailsDto> GetAllMedicineDetails();
     }
 }
