@@ -4,20 +4,24 @@ import Medicine from '../Services'
 import { useDisclosure } from '@mantine/hooks'
 import {
   Avatar,
+  Anchor,
   Badge,
   Box,
+  Button,
+  Center,
+  Card,
   Table,
-  Group,
-  Text,
   Select,
   Container,
   UnstyledButton,
   Menu,
   Flex,
   Mark,
+  Image,
+  Text,
+  Group,
   Tabs,
   Modal,
-  Button,
   Burger,
   rem,
   useMantineTheme,
@@ -61,6 +65,7 @@ const Patient = () => {
 
   const getDetails = async (id) => {
     const response = await Medicine.getMedicineDetails(id)
+    console.log(response)
     setSelectedMedicine(response)
   }
 
@@ -170,12 +175,54 @@ const Patient = () => {
         {medicineData && medicineData.data.data[0].patientLastname}
       </p>
       <Modal opened={opened} onClose={close} title='İlaç Bilgi'>
+        {/* 
         {console.log(selectedMedicine?.data?.data[0])}
         {selectedMedicine?.data?.data[0].id}
         {selectedMedicine?.data?.data[0].imagePath}
         {selectedMedicine?.data?.data[0].medicineId}
         {selectedMedicine?.data?.data[0].medicineName}
         {selectedMedicine?.data?.data[0].webSite}
+        */}
+        <Card withBorder radius='md' className='card'>
+          <Card.Section className='imageSection'>
+            <Image
+              className='imageSection'
+              h={250}
+              w={250}
+              fit='contain'
+              src={`https://localhost:7239/Uploads/MedicineImages/${selectedMedicine?.data?.data[0].imagePath}`}
+              alt={selectedMedicine?.data?.data[0].medicineName}
+            />
+          </Card.Section>
+
+          <Group justify='space-between' mt='md'>
+            <div>
+              <Text fw={500}>{selectedMedicine?.data?.data[0].medicineName}</Text>
+              <Text fz='xs' c='dimmed'>
+                {`İlaç ID: ${selectedMedicine?.data?.data[0].medicineId}`}
+              </Text>
+            </div>
+            <Badge variant='outline'>Antibiyotik</Badge>
+          </Group>
+
+          <Card.Section className='section' mt='md'>
+            <Text fz='sm' c='dimmed' className='label'>
+              Basic configuration
+            </Text>
+
+            <Group gap={8} mb={-8}></Group>
+          </Card.Section>
+
+          <Card.Section className='section'>
+            <Group gap={30}>
+              <Button radius='xl' mx={25} style={{ flex: 1 }}>
+                <Anchor c='white' href={selectedMedicine?.data?.data[0].webSite}>
+                  Prospektüs
+                </Anchor>
+              </Button>
+            </Group>
+          </Card.Section>
+        </Card>
       </Modal>
     </>
   )
