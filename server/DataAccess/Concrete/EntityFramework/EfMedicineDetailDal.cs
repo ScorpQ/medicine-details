@@ -20,6 +20,7 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from md in context.MedicineDetails
                              join m in context.Medicines on md.MedicineId equals m.Id
                              join img in context.MedicineImages on m.Id equals img.MedicineId
+                             join mt in context.MedicineTypes on m.MedicineType equals mt.Id
                              select new MedicineDetailsDto
                              {
                                  Id = m.Id,
@@ -27,7 +28,9 @@ namespace DataAccess.Concrete.EntityFramework
                                  MedicineName = m.MedicineName,
                                  Info = md.Info,
                                  WebSite = md.WebSite,
-                                 ImagePath =img.ImagePath
+                                 ImagePath =img.ImagePath,
+                                 MedicineTypeId = mt.Id,
+                                 MedicineTypeName = mt.MedicineTypeName
                              };
                 return result.ToList();
             }
@@ -40,6 +43,7 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from md in context.MedicineDetails
                              join m in context.Medicines on md.MedicineId equals m.Id
                              join img in context.MedicineImages on m.Id equals img.MedicineId
+                             join mt in context.MedicineTypes on m.MedicineType equals mt.Id
                              where md.MedicineId==id
                              select new MedicineDetailsDto
                              {
@@ -48,7 +52,9 @@ namespace DataAccess.Concrete.EntityFramework
                                  MedicineName = m.MedicineName,
                                  Info = md.Info,
                                  WebSite = md.WebSite,
-                                 ImagePath = img.ImagePath
+                                 ImagePath = img.ImagePath,
+                                 MedicineTypeId=mt.Id,
+                                 MedicineTypeName=mt.MedicineTypeName
                              };
                 return result.ToList();
             }

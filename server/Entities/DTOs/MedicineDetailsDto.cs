@@ -15,5 +15,7 @@ namespace Entities.DTOs
         public string Info { get; set; }
         public string WebSite { get; set; }
         public string ImagePath { get; set; }
+        public int MedicineTypeId { get; set; }
+        public string MedicineTypeName { get; set; }
     }
 }
