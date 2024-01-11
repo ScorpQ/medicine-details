@@ -164,7 +164,7 @@ const Patient = () => {
           />
           <div style={{ flex: 1 }}>
             <Text size='sm' fw={500}>
-              {medicineData?.data?.data[0].patientName} {medicineData?.data?.data[0].patientLastname}
+              {`Hasta ${medicineData?.data?.data[0].patientName} ${medicineData?.data?.data[0].patientLastname}`}
             </Text>
 
             <Text c='dimmed' size='xs'>

@@ -1,43 +1,59 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { IconChevronRight } from '@tabler/icons-react'
+
 import Medicine from '../Services'
-import { Avatar, Badge, Table, Modal, Group, Text, Select, Flex, useMantineTheme, Tabs } from '@mantine/core'
+import {
+  Avatar,
+  Anchor,
+  Badge,
+  Box,
+  Button,
+  Center,
+  Card,
+  Table,
+  Select,
+  Container,
+  UnstyledButton,
+  Menu,
+  Flex,
+  Mark,
+  Image,
+  Text,
+  Group,
+  Tabs,
+  Modal,
+  Burger,
+  rem,
+  useMantineTheme,
+} from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import './table.css'
-
-const user = {
-  name: 'Jane Spoonfighter',
-  email: 'janspoon@fighter.dev',
-  image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png',
-}
-
-const tabs = ['Home', 'Orders', 'Education', 'Community', 'Forums', 'Support', 'Account', 'Helpdesk']
-
-const xxx = (item) => {
-  console.log(`Benim veri: ${item}`)
-}
 
 const Physician = () => {
   // React Hooks
   let { id } = useParams()
   const [reportsData, setReportsData] = useState()
+  const [selectedMedicine, setSelectedMedicine] = useState()
 
   // Mantine hooks
   const theme = useMantineTheme()
   const [userMenuOpened, setUserMenuOpened] = useState(false)
   const [opened, { open, close }] = useDisclosure(false)
+  const [openedd, { toggle }] = useDisclosure(false)
 
   // Mantine Header
-  const items = tabs.map((tab) => (
-    <Tabs.Tab value={tab} key={tab}>
-      {tab}
-    </Tabs.Tab>
-  ))
 
   const getReports = async () => {
     const response = await Medicine.getPhysicianReports(id)
     console.log(id)
     setReportsData(response)
+  }
+
+  const getDetails = async (id, pid) => {
+    const response = await Medicine.getMedicineDetails(id, pid)
+    console.log(response)
+    setSelectedMedicine(response)
   }
 
   useEffect(() => {
@@ -50,49 +66,63 @@ const Physician = () => {
       className='tableRow'
       onClick={() => {
         open()
-        xxx(item)
+        getDetails(item.medicineId, item.id)
       }}
     >
       <Table.Td>
         <Group gap='sm' wrap='nowrap'>
-          <Avatar size={75} src={item.imagePath} radius={10} />
-          <div>
-            <Text fz='md' fw={500}>
+          <Avatar className='imgScale' bg='white' size={95} src={item.imagePath} radius={10} />
+          <Box pl={15}>
+            <Badge fz='md' color='blue' radius='md'>
               {item.medicineName}
+            </Badge>
+            <Text fz='md' c='dimmed' pl={10}>
+              {item.medicineTypeName}
             </Text>
-            <Text fz='xs' c='dimmed'>
-              {item.info}
-            </Text>
-          </div>
+          </Box>
         </Group>
       </Table.Td>
       <Table.Td>
-        <Text fz='sm'>{item.departmentName}</Text>
-        <Text fz='xs' c='dimmed'>
-          {item.doctorName + ' Sertan'}
+        <Text fz='md' fw={500}>
+          {`Dr. ${item.doctorName} ${item.doctorLastname}`}
+        </Text>
+        <Text fz='sm' c='dimmed'>
+          {item.departmentName}
         </Text>
       </Table.Td>
       <Table.Td>
-        <Text fz='sm'>{item.timeOfUseName}</Text>
-        <Text fz='xs' c='dimmed'>
-          {item.timeOfUse}
+        <Text fz='md'>{item.timeOfUseName}</Text>
+        <Text fz='md' c='dimmed' td='underline'>
+          Kullanım miktarı:{' '}
+          <Text display='inline' c='blue'>
+            {item.timeOfUse}
+          </Text>
         </Text>
       </Table.Td>
       <Table.Td>
-        <Text fz='lg'>{item.info}</Text>
-        <Text fz='xs' c='dimmed'>
-          Prospektüs
+        <Badge color='green' size='md' fz='xs'>
+          Kullanım Talimati
+        </Badge>
+        <Text pl={5} fz='md'>
+          {item.info}
         </Text>
       </Table.Td>
       <Table.Td>
-        <Text fz='sm'>{item.startDate}</Text>
-        <Text fz='xs' c='dimmed'>
+        <Badge size='lg' fz='md' fw={500}>
+          {/*console.log(
+              Date(item.endDate) > Date() ? Date(item.endDate) + ' X ' + Date() : Date(item.endDate) + ' X ' + Date()
+            )*/}
+          {item.startDate.slice(0, 10)}
+        </Badge>
+        <Text fz='md' c='dimmed' pl={15}>
           Başlangıç
         </Text>
       </Table.Td>
       <Table.Td>
-        <Text fz='sm'>{item.endDate}</Text>
-        <Text fz='xs' c='dimmed'>
+        <Badge size='lg' fz='md' fw={500} bg='#d10000'>
+          {item.endDate.slice(0, 10)}
+        </Badge>
+        <Text fz='md' c='dimmed' pl={35}>
           Bitiş
         </Text>
       </Table.Td>
@@ -101,12 +131,34 @@ const Physician = () => {
 
   return (
     <>
+      <header className='A'>
+        <Container size='md' className='inner'>
+          <UnstyledButton className='ab' pl={10} pt={10}>
+            <Group>
+              <Avatar
+                src='https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-3.png'
+                radius='xl'
+              />
+              <div style={{ flex: 1 }}>
+                <Text size='sm' fw={500}>
+                  {`Dr. ${reportsData?.data.data[0]?.doctorName} ${reportsData?.data.data[0]?.doctorLastname}`}
+                </Text>
+              </div>
+              <IconChevronRight />
+            </Group>
+          </UnstyledButton>
+          <Group gap={5} visibleFrom='xs'>
+            <Button>Add</Button>
+          </Group>
+          <Burger opened={openedd} onClick={toggle} hiddenFrom='xs' size='sm' />
+        </Container>
+      </header>
       <Table.ScrollContainer minWidth={800}>
         <Table verticalSpacing='sm'>
           <Table.Thead>
-            <Table.Tr>
+            <Table.Tr fz='lg' fw={900}>
               <Table.Th>İlaçlar</Table.Th>
-              <Table.Th>Departman</Table.Th>
+              <Table.Th>Hastane</Table.Th>
               <Table.Th>Kullanım Vakti</Table.Th>
               <Table.Th>Bilgi</Table.Th>
               <Table.Th>Başlangıç Tarihi</Table.Th>
@@ -116,11 +168,53 @@ const Physician = () => {
           <Table.Tbody>{rows}</Table.Tbody>
         </Table>
       </Table.ScrollContainer>
-      <p>
-        Kullanıcı: {reportsData?.data.data[0]?.doctorName} {reportsData?.data.data[0]?.doctorLastname}
-      </p>
+
       <Modal opened={opened} onClose={close} title='İlaç Bilgi'>
-        asdfasdf
+        {/* 
+        {console.log(selectedMedicine?.data?.data[0])}
+        {selectedMedicine?.data?.data[0].id}
+        {selectedMedicine?.data?.data[0].imagePath}
+        {selectedMedicine?.data?.data[0].medicineId}
+        {selectedMedicine?.data?.data[0].medicineName}
+        {selectedMedicine?.data?.data[0].webSite}
+        {selectedMedicine?.data?.data[0].doctorPrescriptionInfo}
+        */}
+        <Card withBorder radius='md' className='card'>
+          <Card.Section className='imageSection'>
+            <Image
+              className='imageSection'
+              h={250}
+              w={250}
+              fit='contain'
+              src={`https://localhost:7239/Uploads/MedicineImages/${selectedMedicine?.data?.data[0].imagePath}`}
+              alt={selectedMedicine?.data?.data[0].medicineName}
+            />
+          </Card.Section>
+
+          <Group justify='space-between' mt='md'>
+            <div>
+              <Text fw={500}>{selectedMedicine?.data?.data[0].medicineName}</Text>
+              <Text fz='xs' c='dimmed'>
+                {`İlaç ID: ${selectedMedicine?.data?.data[0].medicineId}`}
+              </Text>
+            </div>
+            <Badge variant='outline'>{selectedMedicine?.data?.data[0].medicineTypeName}</Badge>
+          </Group>
+
+          <Card.Section className='section' mt='md'>
+            <Text fz='sm' c='dimmed' className='label'>
+              {selectedMedicine?.data?.data[0].doctorPrescriptionInfo}
+            </Text>
+          </Card.Section>
+
+          <Group justify='stretch' mt={50}>
+            <Button radius='xl' mx={25} style={{ width: '-webkit-fill-available' }}>
+              <Anchor c='white' href={selectedMedicine?.data?.data[0].webSite} target='_blank'>
+                Prospektüs
+              </Anchor>
+            </Button>
+          </Group>
+        </Card>
       </Modal>
     </>
   )
