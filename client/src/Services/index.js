@@ -95,6 +95,10 @@ const Medicine = {
       info: info,
     })
   },
+
+  deletePrescription: async (id) => {
+    return await axios.delete(`https://localhost:7239/api/Prescriptions/Delete?id=${id}`)
+  },
 }
 
 export default Medicine

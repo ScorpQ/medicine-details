@@ -35,7 +35,7 @@ import Medicine from '../../Services'
 import { useDisclosure } from '@mantine/hooks'
 import '../../Pages/table.css'
 
-function AddPrescription({ docId }) {
+function AddPrescription({ docId, onRequest }) {
   const [opened, { open, close }] = useDisclosure(false)
   const [patientID, setPatientID] = useState('')
   const [medicineList, setMedicineList] = useState()
@@ -53,8 +53,6 @@ function AddPrescription({ docId }) {
     setMedicineList(await Medicine.medicines(docId))
     setPeriodList(await Medicine.period())
   }
-
-  console.log(periodList)
 
   // ComboBox Options
   const combobox = useCombobox({
@@ -90,7 +88,7 @@ function AddPrescription({ docId }) {
       descrip.toString() //Static
     )
   }
-  console.log(descrip)
+
   return (
     <>
       <Modal opened={opened} onClose={close} title='Reçete Kayıt' size={'auto'}>
@@ -156,10 +154,23 @@ function AddPrescription({ docId }) {
           onChange={(event) => setDescrip(event.currentTarget.value)}
         />
         <Space h='md' />
-        <Button onClick={addPrescription}>Ekle</Button>
+        <Button
+          onClick={() => {
+            addPrescription()
+            onRequest()
+          }}
+        >
+          Ekle
+        </Button>
       </Modal>
 
-      <Button onClick={open}>Reçete Ekle</Button>
+      <Button
+        onClick={() => {
+          open()
+        }}
+      >
+        Reçete Ekle
+      </Button>
     </>
   )
 }

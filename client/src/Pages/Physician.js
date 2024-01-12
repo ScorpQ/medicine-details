@@ -20,6 +20,7 @@ import {
   Flex,
   Mark,
   Image,
+  ActionIcon,
   Text,
   Group,
   Tabs,
@@ -29,6 +30,7 @@ import {
   useMantineTheme,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
+import { IconTrash } from '@tabler/icons-react'
 import './table.css'
 
 const Physician = () => {
@@ -55,20 +57,23 @@ const Physician = () => {
     setSelectedMedicine(response)
   }
 
+  const deletePrescription = async (id) => {
+    const response = await Medicine.deletePrescription(id)
+    getReports()
+  }
+
   useEffect(() => {
     getReports()
   }, [])
 
   const rows = reportsData?.data.data.map((item) => (
-    <Table.Tr
-      key={item.id}
-      className='tableRow'
-      onClick={() => {
-        open()
-        getDetails(item.medicineId, item.id)
-      }}
-    >
-      <Table.Td>
+    <Table.Tr key={item.id} className='tableRow'>
+      <Table.Td
+        onClick={() => {
+          open()
+          getDetails(item.medicineId, item.id)
+        }}
+      >
         <Group gap='sm' wrap='nowrap'>
           <Avatar className='imgScale' bg='white' size={95} src={item.imagePath} radius={10} />
           <Box pl={15}>
@@ -81,7 +86,12 @@ const Physician = () => {
           </Box>
         </Group>
       </Table.Td>
-      <Table.Td>
+      <Table.Td
+        onClick={() => {
+          open()
+          getDetails(item.medicineId, item.id)
+        }}
+      >
         <Text fz='md' fw={500}>
           {`Dr. ${item.doctorName} ${item.doctorLastname}`}
         </Text>
@@ -89,7 +99,12 @@ const Physician = () => {
           {item.departmentName}
         </Text>
       </Table.Td>
-      <Table.Td>
+      <Table.Td
+        onClick={() => {
+          open()
+          getDetails(item.medicineId, item.id)
+        }}
+      >
         <Text fz='md'>{item.timeOfUseName}</Text>
         <Text fz='md' c='dimmed' td='underline'>
           Kullanım miktarı:{' '}
@@ -98,12 +113,22 @@ const Physician = () => {
           </Text>
         </Text>
       </Table.Td>
-      <Table.Td>
-        <Text fz='md' fw={500}>
+      <Table.Td
+        onClick={() => {
+          open()
+          getDetails(item.medicineId, item.id)
+        }}
+      >
+        <Text fz='md' fw={400}>
           {`${item.patientName} ${item.patientLastname}`}
         </Text>
       </Table.Td>
-      <Table.Td>
+      <Table.Td
+        onClick={() => {
+          open()
+          getDetails(item.medicineId, item.id)
+        }}
+      >
         <Badge color='green' size='md' fz='xs'>
           Kullanım Talimati
         </Badge>
@@ -111,7 +136,12 @@ const Physician = () => {
           {item.info}
         </Text>
       </Table.Td>
-      <Table.Td>
+      <Table.Td
+        onClick={() => {
+          open()
+          getDetails(item.medicineId, item.id)
+        }}
+      >
         <Badge size='lg' fz='md' fw={500}>
           {/*console.log(
               Date(item.endDate) > Date() ? Date(item.endDate) + ' X ' + Date() : Date(item.endDate) + ' X ' + Date()
@@ -129,6 +159,15 @@ const Physician = () => {
         <Text fz='md' c='dimmed' pl={35}>
           Bitiş
         </Text>
+      </Table.Td>
+      <Table.Td>
+        <ActionIcon variant='subtle' color='red'>
+          <IconTrash
+            onClick={() => deletePrescription(item.id)}
+            style={{ width: rem(20), height: rem(20) }}
+            stroke={2.4}
+          />
+        </ActionIcon>
       </Table.Td>
     </Table.Tr>
   ))
@@ -152,7 +191,7 @@ const Physician = () => {
             </Group>
           </UnstyledButton>
           <Group gap={5} visibleFrom='xs'>
-            <AddPrescription docId={id} />
+            <AddPrescription docId={id} onRequest={getReports} />
           </Group>
           <Burger opened={openedd} onClick={toggle} hiddenFrom='xs' size='sm' />
         </Container>
