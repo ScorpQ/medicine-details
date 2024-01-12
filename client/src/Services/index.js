@@ -65,6 +65,24 @@ const Medicine = {
     }
   },
 
+  medicines: async (doctorTC) => {
+    try {
+      const response = await axios.get(`https://localhost:7239/api/Medicines/GetDto?TC=${doctorTC}`)
+      return response
+    } catch (error) {
+      alert(error)
+    }
+  },
+
+  period: async () => {
+    try {
+      const response = await axios.get(`https://localhost:7239/api/TimeOfUses/GetAll`)
+      return response
+    } catch (error) {
+      alert(error)
+    }
+  },
+
   addPrescription: async (doctorTC, patientTC, medicineId, startDate, endDate, timeOfUse, pieces, info) => {
     return await axios.post(`https://localhost:7239/api/Prescriptions/Add`, {
       doctorTC: doctorTC,

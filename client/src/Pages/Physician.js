@@ -52,7 +52,6 @@ const Physician = () => {
 
   const getDetails = async (id, pid) => {
     const response = await Medicine.getMedicineDetails(id, pid)
-    console.log(response)
     setSelectedMedicine(response)
   }
 
@@ -97,6 +96,11 @@ const Physician = () => {
           <Text display='inline' c='blue'>
             {item.pieces}
           </Text>
+        </Text>
+      </Table.Td>
+      <Table.Td>
+        <Text fz='md' fw={500}>
+          {`${item.patientName} ${item.patientLastname}`}
         </Text>
       </Table.Td>
       <Table.Td>
@@ -160,6 +164,7 @@ const Physician = () => {
               <Table.Th>İlaçlar</Table.Th>
               <Table.Th>Hastane</Table.Th>
               <Table.Th>Kullanım Vakti</Table.Th>
+              <Table.Th>Hasta</Table.Th>
               <Table.Th>Bilgi</Table.Th>
               <Table.Th>Başlangıç Tarihi</Table.Th>
               <Table.Th>Bitiş Tarihi</Table.Th>
