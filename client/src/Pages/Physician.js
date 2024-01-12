@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { IconChevronRight } from '@tabler/icons-react'
+import AddPrescription from '../Component/AddPrescription'
 
 import Medicine from '../Services'
 import {
@@ -46,7 +47,6 @@ const Physician = () => {
 
   const getReports = async () => {
     const response = await Medicine.getPhysicianReports(id)
-    console.log(id)
     setReportsData(response)
   }
 
@@ -95,7 +95,7 @@ const Physician = () => {
         <Text fz='md' c='dimmed' td='underline'>
           Kullanım miktarı:{' '}
           <Text display='inline' c='blue'>
-            {item.timeOfUse}
+            {item.pieces}
           </Text>
         </Text>
       </Table.Td>
@@ -148,7 +148,7 @@ const Physician = () => {
             </Group>
           </UnstyledButton>
           <Group gap={5} visibleFrom='xs'>
-            <Button>Add</Button>
+            <AddPrescription docId={id} />
           </Group>
           <Burger opened={openedd} onClick={toggle} hiddenFrom='xs' size='sm' />
         </Container>

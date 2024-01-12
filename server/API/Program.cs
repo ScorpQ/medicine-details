@@ -21,7 +21,13 @@ builder.Services.AddControllers();
 
 
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
-
+// TOKEN 
+// TOKEN 
+// TOKEN 
+// TOKEN 
+// TOKEN 
+// TOKEN 
+// TOKEN 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {

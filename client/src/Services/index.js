@@ -64,6 +64,19 @@ const Medicine = {
       alert(error)
     }
   },
+
+  addPrescription: async (doctorTC, patientTC, medicineId, startDate, endDate, timeOfUse, pieces, info) => {
+    return await axios.post(`https://localhost:7239/api/Prescriptions/Add`, {
+      doctorTC: doctorTC,
+      patientTC: patientTC,
+      medicineId: medicineId,
+      startDate: startDate,
+      endDate: endDate,
+      timeOfUse: timeOfUse,
+      pieces: pieces,
+      info: info,
+    })
+  },
 }
 
 export default Medicine

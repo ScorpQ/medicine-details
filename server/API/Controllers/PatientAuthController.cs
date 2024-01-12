@@ -15,7 +15,9 @@ namespace WebAPI.Controllers
             _patientAuthService = patientAuthService;
         }
 
+        //!!!
         [HttpPost("Login")]
+        //!!!
         public ActionResult Login(PatientForLoginDto patientForLoginDto)
         {
             var patientToLogin = _patientAuthService.Login(patientForLoginDto);
