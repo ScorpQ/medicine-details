@@ -81,7 +81,7 @@ function AddPrescription({ docId, onRequest }) {
       docId,
       patientID,
       comboValue.id,
-      '2024-01-12T08:49:43.456Z', //Static
+      '2024-01-13T08:49:43.456Z', //Static
       '2024-01-20T08:49:43.456Z', //Static
       segmentValue, //Static
       count.toString(), //Static
