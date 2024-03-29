@@ -58,6 +58,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfMedicineImageDal>().As<IMedicineImageDal>().SingleInstance();
             builder.RegisterType<FileHelperManager>().As<IFileHelper>().SingleInstance();
 
+            builder.RegisterType<QuestionAnswerManager>().As<IQuestionAnswerService>().SingleInstance();
+            builder.RegisterType<EfQuestionAnswerDal>().As<IQuestionAnswerDal>().SingleInstance();
+
             var assembly = Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

@@ -32,6 +32,7 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<DoctorImage> DoctorImages { get; set; }
         public DbSet<MedicineImage> MedicineImages { get; set;}
         public DbSet<MedicineType> MedicineTypes { get; set; }
+        public DbSet<QuestionAnswer> QuestionAnswers { get; set; }
 
     }
 }
