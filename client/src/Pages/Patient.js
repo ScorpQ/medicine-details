@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Medicine from '../Services'
+import AskQuestion from '../Component/AskQuestion'
 import { IconChevronRight } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
 import {
+  ActionIcon,
   Avatar,
   Anchor,
   Badge,
@@ -34,21 +36,12 @@ import {
   IconMessage,
   IconSettings,
   IconPlayerPause,
-  IconTrash,
+  IconHelpOctagon ,
   IconSwitchHorizontal,
   IconChevronDown,
 } from '@tabler/icons-react'
 import cx from 'clsx'
 import './table.css'
-/*
-const user = {
-  name: 'Jane Spoonfighter',
-  email: 'janspoon@fighter.dev',
-  image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png',
-}
-
-const tabs = ['Home', 'Orders', 'Education', 'Community', 'Forums', 'Support', 'Account', 'Helpdesk']
-*/
 
 const Patient = () => {
   // React Hooks
@@ -125,9 +118,6 @@ const Patient = () => {
         </Table.Td>
         <Table.Td>
           <Badge size='lg' fz='md' fw={500}>
-            {/*console.log(
-              Date(item.endDate) > Date() ? Date(item.endDate) + ' X ' + Date() : Date(item.endDate) + ' X ' + Date()
-            )*/}
             {item.startDate.slice(0, 10)}
           </Badge>
           <Text fz='md' c='dimmed' pl={15}>
@@ -151,6 +141,16 @@ const Patient = () => {
             Bitiş
           </Text>
         </Table.Td>
+        <Table.Td>
+        <ActionIcon variant='subtle' color='red'>
+          <AskQuestion />
+          {
+            /*
+
+            */
+          }
+        </ActionIcon>
+      </Table.Td>
       </Table.Tr>
     ))
 

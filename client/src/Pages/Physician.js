@@ -46,7 +46,6 @@ const Physician = () => {
   const [openedd, { toggle }] = useDisclosure(false)
 
   // Mantine Header
-
   const getReports = async () => {
     const response = await Medicine.getPhysicianReports(id)
     setReportsData(response)
@@ -184,7 +183,7 @@ const Physician = () => {
               />
               <div style={{ flex: 1 }}>
                 <Text size='sm' fw={500}>
-                  {`Dr. ${reportsData?.data.data[0]?.doctorName} ${reportsData?.data.data[0]?.doctorLastname}`}
+                  {`DR. ${reportsData?.data.data[0]?.doctorName} ${reportsData?.data.data[0]?.doctorLastname}`}
                 </Text>
               </div>
               <IconChevronRight />
