@@ -104,6 +104,34 @@ namespace API.Controllers
                 return BadRequest(result.Message);
             }
         }
+        [HttpGet("GetByPrescriptionId")]
+        public IActionResult GetByPrescriptionId(int id)
+        {
+            var result = _questionAnswerService.GetByPrescriptionId(id);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+        }
+        [HttpGet("GetByPrescriptionIdBool")]
+        public IActionResult GetByPrescriptionIdBool(int id)
+        {
+            var result = _questionAnswerService.GetByPrescriptionId(id);
+
+            if (result.Data==null)
+            {
+                return Ok(false);
+            }
+            else
+            {
+                return BadRequest(true);
+            }
+        }
 
         [HttpPost("Add")]
         public IActionResult Add(QuestionAnswer questionAnswer)

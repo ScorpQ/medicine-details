@@ -72,5 +72,11 @@ namespace Business.Concrete
             _questionAnswerDal.Update(QuestionAnswer);
             return new SuccessResult(Messages.QuestionAnswerUpdated);
         }
+
+        public IDataResult<QuestionAnswer> GetByPrescriptionId(int id)
+        {
+
+            return new DataResult<QuestionAnswer>(_questionAnswerDal.Get(d => d.PrescriptionId == id), true, Messages.QuestionAnswerListedById);
+        }
     }
 }

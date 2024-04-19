@@ -15,6 +15,7 @@ namespace Entities.Concrete
         public string Title { get; set; }
         public string Question { get; set; }
         public string Answer { get; set; }
+        public int PrescriptionId { get; set; }
         public bool Answered { get; set; }
     }
 }

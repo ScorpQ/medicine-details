@@ -10,9 +10,11 @@ namespace Business.Abstract
         IDataResult<List<QuestionAnswer>> GetAllNotAnsweredByDoctorTC(string doctorTC);
         IDataResult<List<QuestionAnswer>> GetAllAnsweredByPatientTC(string patientTC);
         IDataResult<List<QuestionAnswer>> GetAllNotAnsweredByPatientTC(string patientTC);
+        IDataResult <QuestionAnswer> GetByPrescriptionId(int id);
+
         IDataResult<QuestionAnswer> GetById(int Id);
         IResult Add(QuestionAnswer questionAnswer);
         IResult Update(QuestionAnswer questionAnswer);
-        IResult Delete(int Id);
+        IResult Delete(int id);
     }
 }
