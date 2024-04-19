@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { IconChevronRight } from '@tabler/icons-react'
 import AddPrescription from '../Component/AddPrescription'
+import SeeQuestions from '../Component/SeeQuestions'
 
 import Medicine from '../Services'
 import {
@@ -191,6 +192,7 @@ const Physician = () => {
           </UnstyledButton>
           <Group gap={5} visibleFrom='xs'>
             <AddPrescription docId={id} onRequest={getReports} />
+            <SeeQuestions docId={id} onRequest={getReports} />
           </Group>
           <Burger opened={openedd} onClick={toggle} hiddenFrom='xs' size='sm' />
         </Container>

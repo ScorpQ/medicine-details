@@ -129,7 +129,7 @@ namespace API.Controllers
             }
             else
             {
-                return BadRequest(true);
+                return Ok(true);
             }
         }
 

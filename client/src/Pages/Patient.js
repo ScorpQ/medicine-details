@@ -36,7 +36,7 @@ import {
   IconMessage,
   IconSettings,
   IconPlayerPause,
-  IconHelpOctagon ,
+  IconHelpOctagon,
   IconSwitchHorizontal,
   IconChevronDown,
 } from '@tabler/icons-react'
@@ -59,7 +59,6 @@ const Patient = () => {
 
   const getDetails = async (id, pid) => {
     const response = await Medicine.getMedicineDetails(id, pid)
-    console.log(response)
     setSelectedMedicine(response)
   }
 
@@ -142,15 +141,10 @@ const Patient = () => {
           </Text>
         </Table.Td>
         <Table.Td>
-        <ActionIcon variant='subtle' color='red'>
-          <AskQuestion />
-          {
-            /*
-
-            */
-          }
-        </ActionIcon>
-      </Table.Td>
+          <ActionIcon variant='subtle' color='red'>
+            <AskQuestion medicineData={item} id={id} />
+          </ActionIcon>
+        </Table.Td>
       </Table.Tr>
     ))
 
@@ -169,7 +163,6 @@ const Patient = () => {
 
             <Text c='dimmed' size='xs'>
               {`Kimlik Numarası: ${medicineData?.data?.data[0].patientTC}`}
-              {console.log(medicineData)}
             </Text>
           </div>
 

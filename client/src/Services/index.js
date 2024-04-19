@@ -4,7 +4,6 @@ const Medicine = {
   getUser: async () => {
     try {
       const response = await axios.get('https://localhost:7239/api/User/GetAllUser')
-      console.log(response.data)
     } catch (error) {
       console.error('API SOURCE HATALI')
     }
@@ -17,7 +16,6 @@ const Medicine = {
         password: password,
       })
       // response.status
-      console.log(response)
       return response
     } catch (error) {
       alert('API SOURCE HATALI')
@@ -39,7 +37,6 @@ const Medicine = {
   getPatientReports: async (id) => {
     try {
       const response = await axios.get(`https://localhost:7239/api/Prescriptions/GetPatientDto?TC=${id}`)
-      console.log(response)
       return response
     } catch (error) {
       alert(error)
@@ -49,7 +46,6 @@ const Medicine = {
   getPhysicianReports: async (id) => {
     try {
       const response = await axios.get(`https://localhost:7239/api/Prescriptions/GetDoctorDto?TC=${id}`)
-      console.log(response)
       return response
     } catch (error) {
       alert(error)
@@ -98,6 +94,36 @@ const Medicine = {
 
   deletePrescription: async (id) => {
     return await axios.delete(`https://localhost:7239/api/Prescriptions/Delete?id=${id}`)
+  },
+
+  sendQuestion: async (patientTC, doctorTC, prescripId, descrip) => {
+    return await axios.post(`https://localhost:7239/api/QuestionAnswers/Add`, {
+      doctorTC: doctorTC,
+      patientTC: patientTC,
+      title: 'hastaSoru',
+      question: descrip,
+      answer: '',
+      prescriptionId: prescripId,
+      answered: false,
+    })
+  },
+
+  IsThereQuestion: async (id) => {
+    try {
+      const response = await axios.get(`https://localhost:7239/api/QuestionAnswers/GetByPrescriptionIdBool?id=${id}`)
+      return response
+    } catch (error) {
+      alert(error)
+    }
+  },
+
+  getQuestions: async (id) => {
+    try {
+      const response = await axios.get(`https://localhost:7239/api/QuestionAnswers/GetByPrescriptionId?id=${id}`)
+      return response
+    } catch (error) {
+      alert(error)
+    }
   },
 }
 

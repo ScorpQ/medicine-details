@@ -1,11 +1,9 @@
-import PhysicianLogin from './Component/PhysicianLogin'
-import PatientLogin from './Component/PatientLogin'
 import Patient from './Pages/Patient'
 import Physician from './Pages/Physician'
 import Login from './Pages/Login'
-import Root from './'
+import { Notifications } from '@mantine/notifications'
 import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route } from 'react-router-dom'
-import { createTheme, MantineProvider } from '@mantine/core'
+import { MantineProvider } from '@mantine/core'
 
 import './App.css'
 
@@ -23,6 +21,7 @@ function App() {
   return (
     <>
       <MantineProvider>
+        <Notifications />
         <RouterProvider router={routerX} />
       </MantineProvider>
     </>
