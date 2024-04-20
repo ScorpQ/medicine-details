@@ -9,5 +9,7 @@ namespace DataAccess.Abstract
         List<QuestionAnswerDto> GetAllAnsweredByDoctor(string TC);
         List<QuestionAnswerDto> GetAllNotAnsweredByDoctor(string TC);
 
+        List<QuestionAnswerDto> GetAllAnsweredByPatient(string TC);
+        List<QuestionAnswerDto> GetAllNotAnsweredByPatient(string TC);
     }
 }

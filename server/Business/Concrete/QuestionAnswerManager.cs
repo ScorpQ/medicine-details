@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -55,13 +56,13 @@ namespace Business.Concrete
             return new DataResult<List<QuestionAnswerDto>>(_questionAnswerDal.GetAllNotAnsweredByDoctor(doctorTC), true, Messages.QuestionAnswerGetAll);
         }
 
-        public IDataResult<List<QuestionAnswer>> GetAllAnsweredByPatientTC(string patientTC)
+        public IDataResult<List<QuestionAnswerDto>> GetAllAnsweredByPatientTC(string patientTC)
         {
-            return new DataResult<List<QuestionAnswer>>(_questionAnswerDal.GetAll(d => d.PatientTC == patientTC && d.Answered == true), true, Messages.QuestionAnswerGetAll);
+            return new DataResult<List<QuestionAnswerDto>>(_questionAnswerDal.GetAllAnsweredByPatient(patientTC), true, Messages.QuestionAnswerGetAll);
         }
-        public IDataResult<List<QuestionAnswer>> GetAllNotAnsweredByPatientTC(string patinetTC)
+        public IDataResult<List<QuestionAnswerDto>> GetAllNotAnsweredByPatientTC(string patientTC)
         {
-            return new DataResult<List<QuestionAnswer>>(_questionAnswerDal.GetAll(d => d.PatientTC == patinetTC && d.Answered == false), true, Messages.QuestionAnswerGetAll);
+            return new DataResult<List<QuestionAnswerDto>>(_questionAnswerDal.GetAllNotAnsweredByPatient(patientTC), true, Messages.QuestionAnswerGetAll);
         }
 
         public IDataResult<QuestionAnswer> GetById(int id)

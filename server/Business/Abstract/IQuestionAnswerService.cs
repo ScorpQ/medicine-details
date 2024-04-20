@@ -9,8 +9,8 @@ namespace Business.Abstract
         IDataResult<List<QuestionAnswer>> GetAll();
         IDataResult<List<QuestionAnswerDto>> GetAllAnsweredByDoctorTC(string doctorTC);
         IDataResult<List<QuestionAnswerDto>> GetAllNotAnsweredByDoctorTC(string doctorTC);
-        IDataResult<List<QuestionAnswer>> GetAllAnsweredByPatientTC(string patientTC);
-        IDataResult<List<QuestionAnswer>> GetAllNotAnsweredByPatientTC(string patientTC);
+        IDataResult<List<QuestionAnswerDto>> GetAllAnsweredByPatientTC(string patientTC);
+        IDataResult<List<QuestionAnswerDto>> GetAllNotAnsweredByPatientTC(string patientTC);
         IDataResult <QuestionAnswer> GetByPrescriptionId(int id);
 
         IDataResult<QuestionAnswer> GetById(int Id);
