@@ -125,6 +125,28 @@ const Medicine = {
       alert(error)
     }
   },
+
+  getQuestionsByPhysicianNotAnswered: async (id) => {
+    try {
+      const response = await axios.get(
+        `https://localhost:7239/api/QuestionAnswers/GetAllNotAnsweredByDoctorTC?doctorTC=${id}`
+      )
+      return response
+    } catch (error) {
+      alert(error)
+    }
+  },
+
+  getQuestionsByPhysicianAnswered: async (id) => {
+    try {
+      const response = await axios.get(
+        `https://localhost:7239/api/QuestionAnswers/GetAllAnsweredByDoctorTC?doctorTC=${id}`
+      )
+      return response
+    } catch (error) {
+      alert(error)
+    }
+  },
 }
 
 export default Medicine

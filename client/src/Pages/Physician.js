@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { IconChevronRight } from '@tabler/icons-react'
 import AddPrescription from '../Component/AddPrescription'
-import SeeQuestions from '../Component/SeeQuestions'
+import { useNavigate } from 'react-router-dom'
 
 import Medicine from '../Services'
 import {
@@ -39,6 +39,7 @@ const Physician = () => {
   let { id } = useParams()
   const [reportsData, setReportsData] = useState()
   const [selectedMedicine, setSelectedMedicine] = useState()
+  const navigate = useNavigate()
 
   // Mantine hooks
   const theme = useMantineTheme()
@@ -192,7 +193,13 @@ const Physician = () => {
           </UnstyledButton>
           <Group gap={5} visibleFrom='xs'>
             <AddPrescription docId={id} onRequest={getReports} />
-            <SeeQuestions docId={id} onRequest={getReports} />
+            <Button
+              onClick={() => {
+                navigate(`/faq/${id}`)
+              }}
+            >
+              Soruları Görüntüle
+            </Button>
           </Group>
           <Burger opened={openedd} onClick={toggle} hiddenFrom='xs' size='sm' />
         </Container>

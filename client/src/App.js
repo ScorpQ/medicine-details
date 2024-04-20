@@ -1,6 +1,7 @@
 import Patient from './Pages/Patient'
 import Physician from './Pages/Physician'
 import Login from './Pages/Login'
+import QuestionList from './Pages/QuestionList'
 import { Notifications } from '@mantine/notifications'
 import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route } from 'react-router-dom'
 import { MantineProvider } from '@mantine/core'
@@ -11,6 +12,7 @@ const routerX = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path='/' element={<Login />} />
+      <Route path='/faq/:id' element={<QuestionList />} />
       <Route path='patient/:id' element={<Patient />} />
       <Route path='physician/:id' element={<Physician />} />
     </Route>
