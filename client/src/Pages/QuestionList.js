@@ -6,6 +6,7 @@ import Medicine from '../Services'
 import {
   AppShell,
   Button,
+  Badge,
   Group,
   ScrollArea,
   Skeleton,
@@ -16,6 +17,7 @@ import {
   Avatar,
   Text,
   Tabs,
+  Modal,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconChevronRight, IconMessageCircle } from '@tabler/icons-react'
@@ -24,7 +26,7 @@ import classes from './ArticleCardVertical.module.css'
 import { useNavigate } from 'react-router-dom'
 
 const QuestionList = () => {
-  const [opened, { toggle }] = useDisclosure()
+  const [opened, { open, close }] = useDisclosure(false)
   const [notAnswereds, setNotAnswereds] = useState()
   const [answereds, setAnswereds] = useState()
 
@@ -34,7 +36,7 @@ const QuestionList = () => {
   const getAnswereds = async () => {
     const response = await Medicine.getQuestionsByPhysicianAnswered(id)
     setAnswereds(response)
-    console.log(response)
+    //console.log(response)
   }
 
   const getNotAnswereds = async () => {
@@ -56,12 +58,8 @@ const QuestionList = () => {
   }, [])
 
   return (
-    <Tabs defaultValue='Cevaplanmış'>
-      <AppShell
-        header={{ height: 60 }}
-        navbar={{ width: 300, breakpoint: 'sm', collapsed: { mobile: !opened } }}
-        padding='md'
-      >
+    <Tabs defaultValue='Cevaplanmamış'>
+      <AppShell header={{ height: 60 }} navbar={{ width: 300, breakpoint: 'sm' }} padding='md'>
         <AppShell.Header>
           <header>
             <Container size='lg' className='inner'>
@@ -112,28 +110,25 @@ const QuestionList = () => {
             </Tabs.Panel>
             <Tabs.Panel value='Cevaplanmamış'>
               {notAnswereds?.data?.data.map((item) => (
-                <Card withBorder radius='md' p={0} className={classes.card}>
+                <Card withBorder radius='md' p={0} className={classes.card} onClick={open}>
                   <Group wrap='nowrap' gap={0} pr={20}>
                     <div className={classes.body}>
-                      <Text tt='uppercase' c='dimmed' fw={700} size='xs'>
-                        fucidine
-                      </Text>
+                      <Badge color='teal' size='md'>
+                        {item.medicineName}
+                      </Badge>
                       <Text className={classes.title} mt='xs' mb='md'>
-                        {truncateText(
-                          'SORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORUSORU',
-                          30
-                        )}
+                        {truncateText(item.question, 70)}
                       </Text>
                       <Group wrap='nowrap' gap='xs'>
                         <Group gap='xs' wrap='nowrap'>
                           <Avatar variant='filled' radius='sm' size='sm' color='green' src='' />
-                          <Text size='xs'>Erkan Baş</Text>
+                          <Text fw={500} size='xs'>{`Hasta ${item.patientName} ${item.patientSurname}`}</Text>
                         </Group>
-                        <Text size='sm' color='green' c='green'>
+                        <Text size='sm' c='green'>
                           •
                         </Text>
                         <Text size='xs' c='dimmed'>
-                          Feb 6th
+                          {item.patientTC}
                         </Text>
                       </Group>
                     </div>
@@ -147,6 +142,9 @@ const QuestionList = () => {
         </AppShell.Navbar>
         <AppShell.Main>Main</AppShell.Main>
       </AppShell>
+      <Modal opened={opened} onClose={close} title='Authentication' yOffset='100px' xOffset='500px'>
+        {/* Modal content */}
+      </Modal>
     </Tabs>
   )
 }

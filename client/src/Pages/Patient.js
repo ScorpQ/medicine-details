@@ -165,7 +165,6 @@ const Patient = () => {
               {`Kimlik Numarası: ${medicineData?.data?.data[0].patientTC}`}
             </Text>
           </div>
-
           <IconChevronRight />
         </Group>
       </UnstyledButton>
@@ -185,15 +184,6 @@ const Patient = () => {
         </Table>
       </Table.ScrollContainer>
       <Modal opened={opened} onClose={close} title='İlaç Bilgi'>
-        {/* 
-        {console.log(selectedMedicine?.data?.data[0])}
-        {selectedMedicine?.data?.data[0].id}
-        {selectedMedicine?.data?.data[0].imagePath}
-        {selectedMedicine?.data?.data[0].medicineId}
-        {selectedMedicine?.data?.data[0].medicineName}
-        {selectedMedicine?.data?.data[0].webSite}
-        {selectedMedicine?.data?.data[0].doctorPrescriptionInfo}
-        */}
         <Card withBorder radius='md' className='card'>
           <Card.Section className='imageSection'>
             <Image
