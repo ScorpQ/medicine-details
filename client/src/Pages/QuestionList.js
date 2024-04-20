@@ -4,9 +4,13 @@ import { useEffect, useState } from 'react'
 import '@mantine/core/styles.css'
 import Medicine from '../Services'
 import classess from '../Component/AskQuestion/BadgeCard.module.css'
+import '@mantine/notifications/styles.css'
+import { notifications } from '@mantine/notifications'
 import {
   Alert,
   AppShell,
+  Textarea,
+  Space,
   Button,
   Badge,
   Group,
@@ -28,24 +32,23 @@ import classes from './ArticleCardVertical.module.css'
 import { useNavigate } from 'react-router-dom'
 
 const QuestionList = () => {
+  let { id } = useParams()
+  const navigate = useNavigate()
+
   const [opened, { open, close }] = useDisclosure(false)
   const [notAnswereds, setNotAnswereds] = useState()
   const [answereds, setAnswereds] = useState()
   const [clicked, setClicked] = useState()
-
-  let { id } = useParams()
-  const navigate = useNavigate()
+  const [descrip, setDescrip] = useState()
 
   const getAnswereds = async () => {
     const response = await Medicine.getQuestionsByPhysicianAnswered(id)
     setAnswereds(response)
-    //console.log(response)
   }
 
   const getNotAnswereds = async () => {
     const response = await Medicine.getQuestionsByPhysicianNotAnswered(id)
     setNotAnswereds(response)
-    console.log(response.data.data)
   }
 
   function truncateText(text, maxLength) {
@@ -53,6 +56,10 @@ const QuestionList = () => {
       return text.substring(0, maxLength) + '...'
     }
     return text
+  }
+
+  const sendAnswer = async (questionId, asnwer) => {
+    const response = await Medicine.sendAnswer(questionId, asnwer)
   }
 
   useEffect(() => {
@@ -74,7 +81,8 @@ const QuestionList = () => {
                   />
                   <div style={{ flex: 1 }}>
                     <Text size='sm' fw={500}>
-                      {`DR. XXX`}
+                      {`DR. ${notAnswereds?.data.data[0].doctorName} ${notAnswereds?.data.data[0].doctorSurname}`}
+                      {console.log(notAnswereds)}
                     </Text>
                   </div>
                   <IconChevronRight />
@@ -104,12 +112,41 @@ const QuestionList = () => {
           </AppShell.Section>
           <AppShell.Section grow my='md' component={ScrollArea}>
             <Tabs.Panel value='Cevaplanmış'>
-              Cevaplanmış tab 60 links in a scrollable section
-              {Array(60)
-                .fill(0)
-                .map((_, index) => (
-                  <Skeleton key={index} h={28} mt='sm' animate={false} />
-                ))}
+              {answereds?.data?.data.map((item) => (
+                <Card
+                  withBorder
+                  radius='md'
+                  p={0}
+                  className={classes.card}
+                  onClick={() => {
+                    open()
+                    setClicked(item)
+                  }}
+                >
+                  <Group wrap='nowrap' gap={0} pr={20}>
+                    <div className={classes.body}>
+                      <Badge color='teal' size='md'>
+                        {item.medicineName}
+                      </Badge>
+                      <Text className={classes.title} mt='xs' mb='md'>
+                        {truncateText(item.question, 70)}
+                      </Text>
+                      <Group wrap='nowrap' gap='xs'>
+                        <Group gap='xs' wrap='nowrap'>
+                          <Avatar variant='filled' radius='sm' size='sm' color='green' src='' />
+                          <Text fw={500} size='xs'>{`Hasta ${item.patientName} ${item.patientSurname}`}</Text>
+                        </Group>
+                        <Text size='sm' c='green'>
+                          •
+                        </Text>
+                        <Text size='xs' c='dimmed'>
+                          {item.patientTC}
+                        </Text>
+                      </Group>
+                    </div>
+                  </Group>
+                </Card>
+              ))}
             </Tabs.Panel>
             <Tabs.Panel value='Cevaplanmamış'>
               {notAnswereds?.data?.data.map((item) => (
@@ -163,6 +200,7 @@ const QuestionList = () => {
             <Group justify='apart'>
               <Text fz='lg' fw={500}>
                 {`Hastanın sorusu`}
+                {console.log(clicked)}
               </Text>
               <Badge size='sm' variant='light'>
                 {`Hasta ${clicked?.patientName} ${clicked?.patientSurname}`}
@@ -172,22 +210,46 @@ const QuestionList = () => {
               {clicked?.question}
             </Text>
           </Card.Section>
-        </Card>
-        <Card>
+
           <Card.Section className={classess.section} mt='md'>
             <Group justify='apart'>
               <Text fz='lg' fw={500}>
                 {`Cevabınız`}
               </Text>
               <Badge size='sm' variant='light'>
-                {`Dr. ${clicked?.physicianName}`}
+                {`Dr. ${clicked?.doctorName} ${clicked?.doctorSurname}`}
               </Badge>
             </Group>
-            <Text fz='sm' mt='xs'>
-              <Alert variant='light' color='cyan' radius='md' title='Beklemede' icon={<IconInfoCircle />}>
-                Doktorunuz henüz bu soruyu cevaplandırmamış.
+            {clicked?.answered ? (
+              <Alert variant='light' color='teal' radius='md' title='Cevapladınız' icon={<IconInfoCircle />}>
+                {clicked.answer}
               </Alert>
-            </Text>
+            ) : (
+              <>
+                <Textarea
+                  placeholder='...'
+                  mt='md'
+                  autosize
+                  minRows={7}
+                  onChange={(event) => setDescrip(event.currentTarget.value)}
+                />
+                <Space h='sm' />
+                <Button
+                  variant='gradient'
+                  gradient={{ from: 'green', to: 'indigo', deg: 91 }}
+                  onClick={() => {
+                    open()
+                    sendAnswer(clicked.id, descrip)
+                    notifications.show({
+                      title: 'Cevabınız gönderildi.',
+                      message: 'Bu pencere 5 saniye sonra kapanacak.',
+                    })
+                  }}
+                >
+                  Cevabı gönder.
+                </Button>
+              </>
+            )}
           </Card.Section>
         </Card>
       </Modal>

@@ -126,11 +126,13 @@ function AskQuestion({ medicineData, id }) {
                   </Group>
                   <Text fz='sm' mt='xs'>
                     {questionData?.data?.data?.answer === '' ? (
-                      <Alert variant='light' color='cyan' radius='md' title='Beklemede' icon={<IconInfoCircle />}>
+                      <Alert variant='light' color='cyan' radius='md' title='Beklemede.' icon={<IconInfoCircle />}>
                         Doktorunuz henüz bu soruyu cevaplandırmamış.
                       </Alert>
                     ) : (
-                      questionData?.data?.data?.answer
+                      <Alert variant='light' color='teal' radius='md' title='Cevaplandı.' icon={<IconInfoCircle />}>
+                        {questionData?.data?.data?.answer}
+                      </Alert>
                     )}
                   </Text>
                 </Card.Section>

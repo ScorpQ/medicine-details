@@ -147,6 +147,14 @@ const Medicine = {
       alert(error)
     }
   },
+
+  sendAnswer: async (id, answer) => {
+    try {
+      return await axios.put(`https://localhost:7239/api/QuestionAnswers/Update?answer=${answer}&id=${id}`)
+    } catch (error) {
+      alert(error)
+    }
+  },
 }
 
 export default Medicine
