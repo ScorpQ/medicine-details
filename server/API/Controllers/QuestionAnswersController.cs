@@ -140,9 +140,20 @@ namespace API.Controllers
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(QuestionAnswer questionAnswer)
+        public IActionResult Update(string answer,int id)
         {
-            var result = _questionAnswerService.Update(questionAnswer);
+            QuestionAnswer questionAnswer = new();
+            var result = _questionAnswerService.GetById(id);
+            questionAnswer.Question = result.Data.Question;
+            questionAnswer.Title = result.Data.Title;
+            questionAnswer.DoctorTC = result.Data.DoctorTC;
+            questionAnswer.PatientTC = result.Data.PatientTC;
+            questionAnswer.PrescriptionId = result.Data.PrescriptionId;
+            questionAnswer.Answer = answer;
+            questionAnswer.Answered = true;
+            questionAnswer.Id = id;
+            _questionAnswerService.Update(questionAnswer);
+            
             if (result.Success)
             {
                 return Ok(result);
