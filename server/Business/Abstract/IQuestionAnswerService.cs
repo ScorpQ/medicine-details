@@ -1,13 +1,14 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Abstract
 {
     public interface IQuestionAnswerService
     {
         IDataResult<List<QuestionAnswer>> GetAll();
-        IDataResult<List<QuestionAnswer>> GetAllAnsweredByDoctorTC(string doctorTC);
-        IDataResult<List<QuestionAnswer>> GetAllNotAnsweredByDoctorTC(string doctorTC);
+        IDataResult<List<QuestionAnswerDto>> GetAllAnsweredByDoctorTC(string doctorTC);
+        IDataResult<List<QuestionAnswerDto>> GetAllNotAnsweredByDoctorTC(string doctorTC);
         IDataResult<List<QuestionAnswer>> GetAllAnsweredByPatientTC(string patientTC);
         IDataResult<List<QuestionAnswer>> GetAllNotAnsweredByPatientTC(string patientTC);
         IDataResult <QuestionAnswer> GetByPrescriptionId(int id);
