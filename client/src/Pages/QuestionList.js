@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react'
 // Mantine Imports
 import '@mantine/core/styles.css'
 import Medicine from '../Services'
+import classess from '../Component/AskQuestion/BadgeCard.module.css'
 import {
+  Alert,
   AppShell,
   Button,
   Badge,
@@ -20,7 +22,7 @@ import {
   Modal,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconChevronRight, IconMessageCircle } from '@tabler/icons-react'
+import { IconChevronRight, IconMessageCircle, IconInfoCircle } from '@tabler/icons-react'
 import classes from './ArticleCardVertical.module.css'
 
 import { useNavigate } from 'react-router-dom'
@@ -29,6 +31,7 @@ const QuestionList = () => {
   const [opened, { open, close }] = useDisclosure(false)
   const [notAnswereds, setNotAnswereds] = useState()
   const [answereds, setAnswereds] = useState()
+  const [clicked, setClicked] = useState()
 
   let { id } = useParams()
   const navigate = useNavigate()
@@ -110,7 +113,16 @@ const QuestionList = () => {
             </Tabs.Panel>
             <Tabs.Panel value='Cevaplanmamış'>
               {notAnswereds?.data?.data.map((item) => (
-                <Card withBorder radius='md' p={0} className={classes.card} onClick={open}>
+                <Card
+                  withBorder
+                  radius='md'
+                  p={0}
+                  className={classes.card}
+                  onClick={() => {
+                    open()
+                    setClicked(item)
+                  }}
+                >
                   <Group wrap='nowrap' gap={0} pr={20}>
                     <div className={classes.body}>
                       <Badge color='teal' size='md'>
@@ -142,8 +154,42 @@ const QuestionList = () => {
         </AppShell.Navbar>
         <AppShell.Main>Main</AppShell.Main>
       </AppShell>
-      <Modal opened={opened} onClose={close} title='Authentication' yOffset='100px' xOffset='500px'>
-        {/* Modal content */}
+      <Modal opened={opened} onClose={close} title='Cevaplama Paneli' yOffset='100px' xOffset='500px'>
+        <Badge color='teal' size='md'>
+          {`İlaç: ${clicked?.medicineName}`}
+        </Badge>
+        <Card>
+          <Card.Section className={classess.section} mt='md'>
+            <Group justify='apart'>
+              <Text fz='lg' fw={500}>
+                {`Hastanın sorusu`}
+              </Text>
+              <Badge size='sm' variant='light'>
+                {`Hasta ${clicked?.patientName} ${clicked?.patientSurname}`}
+              </Badge>
+            </Group>
+            <Text fz='sm' mt='xs' fw={400}>
+              {clicked?.question}
+            </Text>
+          </Card.Section>
+        </Card>
+        <Card>
+          <Card.Section className={classess.section} mt='md'>
+            <Group justify='apart'>
+              <Text fz='lg' fw={500}>
+                {`Cevabınız`}
+              </Text>
+              <Badge size='sm' variant='light'>
+                {`Dr. ${clicked?.physicianName}`}
+              </Badge>
+            </Group>
+            <Text fz='sm' mt='xs'>
+              <Alert variant='light' color='cyan' radius='md' title='Beklemede' icon={<IconInfoCircle />}>
+                Doktorunuz henüz bu soruyu cevaplandırmamış.
+              </Alert>
+            </Text>
+          </Card.Section>
+        </Card>
       </Modal>
     </Tabs>
   )

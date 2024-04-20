@@ -52,6 +52,7 @@ function AddPrescription({ docId, onRequest }) {
   const medicinesAndperiod = async () => {
     setMedicineList(await Medicine.medicines(docId))
     setPeriodList(await Medicine.period())
+    console.log()
   }
 
   // ComboBox Options
