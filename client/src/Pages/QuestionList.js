@@ -187,7 +187,7 @@ const QuestionList = () => {
             </Tabs.Panel>
             <Tabs.Panel value='messages'>Messages tab content</Tabs.Panel>
           </AppShell.Section>
-          <AppShell.Section>Navbar footer – always at the bottom</AppShell.Section>
+          <AppShell.Section>Test Footer Test</AppShell.Section>
         </AppShell.Navbar>
         <AppShell.Main>Main</AppShell.Main>
       </AppShell>
